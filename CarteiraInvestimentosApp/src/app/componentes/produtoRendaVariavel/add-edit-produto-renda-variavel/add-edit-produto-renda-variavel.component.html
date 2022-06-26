@@ -1,0 +1,14 @@
+<h1 mat-dialog-title>Adicionar Produto Renda Variavel</h1>
+<div mat-dialog-content>
+    <form [formGroup]="produtoRVForm">
+        <mat-form-field appearance="outline">
+            <mat-label>Nome do Produto</mat-label>
+            <input formControlName="produtoRendaVariavelNome" matInput >
+          </mat-form-field>
+    </form>
+
+</div>
+<div mat-dialog-actions [align]="'end'">
+    <button  mat-raised-button color="warn" mat-dialog-close>Fechar</button>
+    <button  mat-raised-button color="primary"  (click)="EnviarFormulario()">{{actionBtn}}</button>
+</div>

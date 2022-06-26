@@ -1,0 +1,58 @@
+<div class="container mt-3">
+    <button mat-raised-button color="warn" (click)="openDialog()">Adicionar Carteira</button>
+
+<mat-form-field appearance="standard">
+    <mat-label>Filtro</mat-label>
+    <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Mia" #input>
+  </mat-form-field>
+  
+  <div class="mat-elevation-z8">
+    <table mat-table [dataSource]="dataSource" matSort>
+  
+      <!-- ID Column -->
+      <ng-container matColumnDef="carteiraId">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Carteira Id </th>
+        <td mat-cell *matCellDef="let row"> {{row.carteiraId}} </td>
+      </ng-container>
+    
+      <ng-container matColumnDef="carteiraNome">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Carteira Nome </th>
+        <td mat-cell *matCellDef="let row"> {{row.carteiraNome}} </td>
+      </ng-container>
+      <ng-container matColumnDef="dataInicial">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Data Inicial </th>
+        <td mat-cell *matCellDef="let row"> {{row.dataInicial | date}} </td>
+      </ng-container>
+      <ng-container matColumnDef="usuarioEmail">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Usuario Email </th>
+        <td mat-cell *matCellDef="let row"> {{row.usuario.usuarioEmail}} </td>
+      </ng-container>
+      <ng-container matColumnDef="usuarioNome">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Usuario Nome</th>
+        <td mat-cell *matCellDef="let row"> {{row.usuario.usuarioNome}} </td>
+      </ng-container>
+      <ng-container matColumnDef="action">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Ações </th>
+        <td mat-cell *matCellDef="let row"> 
+        <button mat-icon-button color="primary" (click)="editarCarteira(row)">
+            <mat-icon>edit</mat-icon>
+        </button>  
+        <button mat-icon-button color="warn" (click)="apagarCarteira(row.carteiraId)">
+            <mat-icon>delete</mat-icon>
+        </button>  
+        </td>
+      </ng-container>
+  
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  
+      <!-- Row shown when there is no matching data. -->
+      <tr class="mat-row" *matNoDataRow>
+        <td class="mat-cell" colspan="4">Nenhum dado encontrado "{{input.value}}"</td>
+      </tr>
+    </table>
+  
+    <mat-paginator [pageSizeOptions]="[ 10, 25, 100]" aria-label="Selecione o número de páginas"></mat-paginator>
+  </div>
+</div>
+

@@ -1,0 +1,17 @@
+<!-- Materia dialog -->
+<h1 mat-dialog-title>Adicionar Banco</h1>
+<div mat-dialog-content>
+  <!-- formulario -->
+    <form [formGroup]="bancoForm">
+        <mat-form-field appearance="outline">
+            <mat-label>Nome do Banco</mat-label>
+            <input formControlName="bancoNome" matInput >
+          </mat-form-field>
+    </form>
+
+</div>
+<!-- dialogo com os botoes -->
+<div mat-dialog-actions [align]="'end'">
+    <button  mat-raised-button color="warn" mat-dialog-close>Fechar</button>
+    <button  mat-raised-button color="primary"  (click)="EnviarFormulario()">{{actionBtn}}</button>
+</div>

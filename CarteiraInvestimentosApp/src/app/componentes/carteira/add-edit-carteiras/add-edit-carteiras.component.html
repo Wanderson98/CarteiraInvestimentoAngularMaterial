@@ -1,0 +1,30 @@
+
+<!-- Materia dialog -->
+<h1 mat-dialog-title>Adicionar Carteira</h1>
+<div mat-dialog-content>
+   <!-- formulario -->
+    <form [formGroup]="carteiraForm">
+        <mat-form-field appearance="outline">
+            <mat-label>Nome da Carteira</mat-label>
+            <input formControlName="carteiraNome" matInput >
+          </mat-form-field>
+         <mat-form-field appearance="outline">
+            <mat-label>Data Inicial</mat-label>
+            <input formControlName="dataInicial" matInput type="date" >
+          </mat-form-field>
+          <mat-form-field appearance="outline">
+            <mat-label> Usuario</mat-label>
+            <mat-select formControlName="usuarioId" placeholder="Usuario" >
+                <div *ngFor="let u of usuarios">
+                    <mat-option [value]="u.usuarioId"> {{ u.usuarioNome}} </mat-option>
+                </div>
+            </mat-select>
+          </mat-form-field>
+    </form>
+<!-- dialogo com os botoes -->
+</div>
+<div mat-dialog-actions [align]="'end'">
+    <button  mat-raised-button color="warn" mat-dialog-close>Fechar</button>
+    <button  mat-raised-button color="primary"  (click)="EnviarFormulario()">{{actionBtn}}</button>
+</div>
+

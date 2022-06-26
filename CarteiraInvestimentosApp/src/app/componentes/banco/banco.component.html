@@ -1,0 +1,50 @@
+<div class="container mt-3">
+  <!-- botao para abrir dialog  -->
+    <button mat-raised-button color="warn" (click)="openDialog()"> Adicionar Banco</button>
+<!-- filtro -->
+<mat-form-field appearance="standard">
+    <mat-label>Filtro</mat-label>
+    <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Mia" #input>
+  </mat-form-field>
+<!-- tabela -->
+  <div class="mat-elevation-z8">
+    <!-- data source é o atributo com os dados do component -->
+    <table mat-table [dataSource]="dataSource" matSort>
+
+      <!-- ID Column -->
+      <ng-container matColumnDef="bancoId">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Banco Id </th>
+        <td mat-cell *matCellDef="let row"> {{row.bancoId}} </td>
+      </ng-container>
+
+      <!-- Progress Column -->
+      <ng-container matColumnDef="bancoNome">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Banco Nome </th>
+        <td mat-cell *matCellDef="let row"> {{row.bancoNome}} </td>
+      </ng-container>
+      <!-- acoes coluna -->
+      <ng-container matColumnDef="action">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Ações </th>
+        <td mat-cell *matCellDef="let row">
+      <!-- botões com as açoes -->
+        <button mat-icon-button color="primary" (click)="editarBanco(row)">
+            <mat-icon>edit</mat-icon>
+        </button>
+        <button mat-icon-button color="warn" (click)="apagarBanco(row.bancoId)">
+            <mat-icon>delete</mat-icon>
+        </button>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+      <!-- Linha quando não encontra dado. -->
+      <tr class="mat-row" *matNoDataRow>
+        <td class="mat-cell" colspan="4">Nenhum dado Encontrado "{{input.value}}"</td>
+      </tr>
+    </table>
+    <!-- paginaçào  -->
+    <mat-paginator [pageSizeOptions]="[ 10, 25, 100]" aria-label="Selecione o número de itens" ></mat-paginator>
+  </div>
+</div>

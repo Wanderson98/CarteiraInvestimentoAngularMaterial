@@ -1,0 +1,19 @@
+<h1 mat-dialog-title>Adicionar Login</h1>
+<div mat-dialog-content>
+    <form [formGroup]="loginForm">
+        <mat-form-field appearance="outline">
+            <mat-label>Login Email</mat-label>
+            <input formControlName="loginEmail" matInput type="email">
+          </mat-form-field>
+          <mat-form-field appearance="outline">
+            <mat-label>Senha</mat-label>
+            <input formControlName="loginSenha" matInput type="password" >
+          </mat-form-field>
+    </form>
+
+</div>
+<div mat-dialog-actions [align]="'end'">
+    <button  mat-raised-button color="warn" mat-dialog-close>Fechar</button>
+    <button  mat-raised-button color="primary"  (click)="EnviarFormulario()">{{actionBtn}}</button>
+</div>
+

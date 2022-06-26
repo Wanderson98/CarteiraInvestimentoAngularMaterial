@@ -1,0 +1,70 @@
+<!-- mat fialog -->
+<h1 mat-dialog-title>Adicionar Renda Variavel</h1>
+<div mat-dialog-content>
+  <!-- formulario -->
+     <form [formGroup]="rendaVariavelForm">
+      <!-- produtos renda variavel -->
+      <mat-form-field appearance="outline">
+        <mat-label> Produto Renda Variavel</mat-label>
+        <mat-select formControlName="produtoRendaVariavelId" placeholder="Produto Renda Variavel">
+            <div *ngFor="let u of produtosRV">
+                <mat-option [value]="u.produtoRendaVariavelId"> {{ u.produtoRendaVariavelNome }} </mat-option>
+            </div>
+        </mat-select>
+      </mat-form-field>
+      <!-- nome do papel -->
+        <mat-form-field appearance="outline">
+            <mat-label>Nome Papel</mat-label>
+            <input formControlName="nomeDoPapel" matInput type="text" placeholder = "Ticket Papel">
+          </mat-form-field>
+      <!-- unidades -->
+         <mat-form-field appearance="outline">
+            <mat-label>Unidades</mat-label>
+            <input formControlName="unidades" matInput type="text" type="number" placeholder = "Rentabilidade">
+          </mat-form-field>
+      <!-- se esta ativo -->
+          <mat-form-field appearance="outline">
+            <mat-label>Ativo</mat-label>
+            <input formControlName="isActive" matInput  >
+          </mat-form-field>
+        <!-- cotacao media -->
+          <mat-form-field appearance="outline">
+            <mat-label>Cotacao Media</mat-label>
+            <input formControlName="cotacaoMedia" matInput type="number" placeholder="Cotacao Media (Opcional)">
+          </mat-form-field>
+      <!-- cotacao atual  -->
+          <mat-form-field appearance="outline">
+            <mat-label>Cotacao Atual</mat-label>
+            <input formControlName="cotacaoAtual" matInput type="number" placeholder="Cotacao Atual (Opcional)" >
+          </mat-form-field>
+        <!-- custos -->
+          <mat-form-field appearance="outline">
+            <mat-label>Custos</mat-label>
+            <input formControlName="custos" matInput type="number" placeholder="Custos(Opcional)">
+          </mat-form-field>
+          <!-- banco -->
+          <mat-form-field appearance="outline">
+            <mat-label> Banco</mat-label>
+            <mat-select formControlName="bancoId" placeholder="Banco" >
+                <div *ngFor="let u of bancos">
+                    <mat-option [value]="u.bancoId"> {{ u.bancoNome }} </mat-option>
+                </div>
+            </mat-select>
+          </mat-form-field>
+          <!-- Carteira -->
+          <mat-form-field appearance="outline">
+            <mat-label> Carteira</mat-label>
+            <mat-select formControlName="carteiraId" placeholder="Usuario" >
+                <div *ngFor="let u of carteiras">
+                    <mat-option [value]="u.carteiraId"> {{ u.carteiraNome}} </mat-option>
+                </div>
+            </mat-select>
+          </mat-form-field>
+
+    </form>
+<!-- Acoes do formulario -->
+</div>
+<div mat-dialog-actions [align]="'end'">
+    <button  mat-raised-button color="warn" mat-dialog-close>Fechar</button>
+    <button  mat-raised-button color="primary"  (click)="EnviarFormulario()">{{actionBtn}}</button>
+</div>

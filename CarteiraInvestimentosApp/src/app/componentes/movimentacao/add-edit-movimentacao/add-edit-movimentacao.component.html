@@ -1,0 +1,73 @@
+<h1 mat-dialog-title>Adicionar Movimentação</h1>
+<div mat-dialog-content>
+     <form [formGroup]="movimentacaoForm">
+
+        <mat-form-field appearance="outline">
+            <mat-label>Valor</mat-label>
+            <input formControlName="valor" matInput type="number">
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label> Unidades </mat-label>
+            <input formControlName="unidades" matInput type="text" type="number">
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>Data Movimentacao</mat-label>
+            <input formControlName="dataMovimentacao" matInput type="date" >
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label> Status Movimentacao</mat-label>
+            <mat-select formControlName="statusMovimentacaoId" placeholder="Status" >
+                <div *ngFor="let u of statusMovimentacao">
+                    <mat-option [value]="u.statusMovimentacaoId"> {{ u.statusMovimentacaoNome }} </mat-option>
+                </div>
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label> Renda Variavel</mat-label>
+            <mat-select formControlName="rendaVariavelid" placeholder="Renda Variavel" >
+                <div *ngFor="let u of rendaVariavels">
+                    <mat-option [value]="u.rendaVariavelId"> {{ u.nomeDoPapel }} </mat-option>
+                </div>
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label> Renda Fixa</mat-label>
+            <mat-select formControlName="rendaFixaId" placeholder="Renda Fixa" >
+                <div *ngFor="let u of rendaFixas">
+                    <mat-option [value]="u.rendaFixaId"> {{ u.nomeRendaFixa }} </mat-option>
+                </div>
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label> Tesouro Direto </mat-label>
+            <mat-select formControlName="tesouroDiretoId" placeholder="Tesouro Direto" >
+                <div *ngFor="let u of tesouroDiretos">
+                    <mat-option [value]="u.tesouroDiretoId"> {{ u.tesouroDiretoId}} </mat-option>
+                </div>
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label> Poupanca </mat-label>
+            <mat-select formControlName="poupancaId" placeholder="Tesouro Direto" >
+                <div *ngFor="let u of poupancas">
+                    <mat-option [value]="u.poupancaId"> {{ u.poupancaId}} </mat-option>
+                </div>
+            </mat-select>
+          </mat-form-field>
+
+    </form>
+
+</div>
+<div mat-dialog-actions [align]="'end'">
+    <button  mat-raised-button color="warn" mat-dialog-close>Fechar</button>
+    <button  mat-raised-button color="primary"  (click)="EnviarFormulario()">{{actionBtn}}</button>
+</div>
+
+

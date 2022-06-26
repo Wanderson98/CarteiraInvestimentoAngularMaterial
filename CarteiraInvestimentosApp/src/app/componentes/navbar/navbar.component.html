@@ -1,0 +1,72 @@
+<mat-toolbar color="primary">
+    <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon" (click)="drawer.toggle()">
+      <mat-icon>list </mat-icon>
+    </button>
+    <span class="test">Carteira Investimentos</span>
+    <span class="example-spacer"></span>
+    <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
+      <mat-icon>favorite</mat-icon>
+    </button>
+
+  </mat-toolbar>
+
+  <mat-drawer-container class="example-container" autosize >
+    <mat-drawer #drawer class="sidenav" mode="over">
+      <mat-nav-list class="nav-list">
+        <a mat-list-item routerLink="" class="me-2">
+          <i class="material-icons">home</i>Home
+        </a>
+        <a mat-list-item routerLink="/banco">
+          <i class="material-icons">account_balance</i>  Bancos
+        </a>
+        <a mat-list-item routerLink="/login">
+          <i class="material-icons">account_box</i>  Login
+        </a>
+        <a mat-list-item routerLink="/poupanca">
+          <i class="material-icons">attach_money</i>  Poupanca
+        </a>
+        <a mat-list-item routerLink="/rendaFixa">
+          <i class="material-icons">attach_money</i>Renda Fixa
+        </a>
+        <a mat-list-item routerLink="/rendaVariavel">
+          <i class="material-icons">attach_money</i>Renda Variavel
+        </a>
+        <a mat-list-item routerLink="/movimentacao">
+          <i class="material-icons">sync</i>  Movimentacao
+        </a>
+        <a mat-list-item routerLink="/usuarios">
+          <i class="material-icons">group </i> Usuarios
+        </a>
+        <a mat-list-item routerLink="/status">
+          <i class="material-icons">done_all</i>  Status
+        </a>
+        <a mat-list-item routerLink="/indexador">
+          <i class="material-icons">label </i>  Indexador
+        </a>
+        
+        <a mat-list-item routerLink="/carteira">
+          <i class="material-icons">account_balance_wallet</i>Carteira
+        </a>
+        <a mat-list-item routerLink="/tesouroDireto">
+          <i class="material-icons">home</i> Tesouro Direto
+        </a>
+       
+        <a mat-list-item routerLink="/produtoRF">
+          <i class="material-icons">bookmark</i>  Produtos Renda Fixa
+        </a>
+        <a mat-list-item routerLink="produtoRV">
+          <i class="material-icons">bookmark_border</i>  Produtos Renda Variavel
+        </a>
+        
+      </mat-nav-list>
+      
+    </mat-drawer>
+  
+    <div class="sidenav-content">
+      <button  mat-icon-button (click)="drawer.toggle()">
+        <mat-icon>drag_indicator</mat-icon>
+      </button>
+      <router-outlet></router-outlet>
+    </div>
+  
+  </mat-drawer-container>
