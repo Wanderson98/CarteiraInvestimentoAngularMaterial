@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CarteiraInvestimentosApi.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20220626043034_CarteiraInvestimentoIncialDatabase1")]
-    partial class CarteiraInvestimentoIncialDatabase1
+    [Migration("20220626151236_CarteiraApiInicialDataBase")]
+    partial class CarteiraApiInicialDataBase
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -102,19 +102,19 @@ namespace CarteiraInvestimentosApi.Migrations
                     b.Property<DateTime>("DataMovimentacao")
                         .HasColumnType("TEXT");
 
-                    b.Property<int>("PoupancaId")
+                    b.Property<int?>("PoupancaId")
                         .HasColumnType("INTEGER");
 
-                    b.Property<int>("RendaFixaId")
+                    b.Property<int?>("RendaFixaId")
                         .HasColumnType("INTEGER");
 
-                    b.Property<int>("RendaVariavelId")
+                    b.Property<int?>("RendaVariavelId")
                         .HasColumnType("INTEGER");
 
                     b.Property<int>("StatusMovimentacaoId")
                         .HasColumnType("INTEGER");
 
-                    b.Property<int>("TesouroDiretoId")
+                    b.Property<int?>("TesouroDiretoId")
                         .HasColumnType("INTEGER");
 
                     b.Property<int>("Unidades")
@@ -233,7 +233,7 @@ namespace CarteiraInvestimentosApi.Migrations
                     b.Property<decimal>("Rendimento")
                         .HasColumnType("TEXT");
 
-                    b.Property<decimal>("Rentabilidadae")
+                    b.Property<decimal>("Rentabilidade")
                         .HasColumnType("TEXT");
 
                     b.Property<DateTime>("Vencimento")
@@ -415,21 +415,15 @@ namespace CarteiraInvestimentosApi.Migrations
                 {
                     b.HasOne("CarteiraInvestimentosApi.Models.Poupanca", "Poupanca")
                         .WithMany("Movimentacoes")
-                        .HasForeignKey("PoupancaId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("PoupancaId");
 
                     b.HasOne("CarteiraInvestimentosApi.Models.RendaFixa", "RendaFixa")
                         .WithMany("Movimentacoes")
-                        .HasForeignKey("RendaFixaId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("RendaFixaId");
 
                     b.HasOne("CarteiraInvestimentosApi.Models.RendaVariavel", "RendaVariavel")
                         .WithMany("Movimentacoes")
-                        .HasForeignKey("RendaVariavelId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("RendaVariavelId");
 
                     b.HasOne("CarteiraInvestimentosApi.Models.StatusMovimentacao", "StatusMovimentacao")
                         .WithMany("Movimentacoes")
@@ -439,9 +433,7 @@ namespace CarteiraInvestimentosApi.Migrations
 
                     b.HasOne("CarteiraInvestimentosApi.Models.TesouroDireto", "TesouroDireto")
                         .WithMany("Movimentacoes")
-                        .HasForeignKey("TesouroDiretoId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("TesouroDiretoId");
 
                     b.Navigation("Poupanca");
 

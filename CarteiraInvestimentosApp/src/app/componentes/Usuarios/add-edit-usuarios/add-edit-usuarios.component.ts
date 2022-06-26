@@ -1,7 +1,7 @@
 import { Usuario } from './../../../models/usuario';
 import { UsuarioService } from './../../../services/usuario.service';
 import { Component, Inject, OnInit } from '@angular/core';
-import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
@@ -12,12 +12,13 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 })
 export class AddEditUsuariosComponent implements OnInit {
 
-  constructor(private formBuilder: UntypedFormBuilder, private service: UsuarioService, private toastr: ToastrService,
+  constructor(private formBuilder: FormBuilder, private service: UsuarioService, private toastr: ToastrService,
     @Inject(MAT_DIALOG_DATA) public editData : any,
     private dialog : MatDialogRef<AddEditUsuariosComponent>
     ) { }
  
-    usuarioForm!: UntypedFormGroup;
+    usuarioForm!: FormGroup;
+    loginForm!: FormGroup
     actionBtn : string = "Salvar";
   ngOnInit(): void {
 

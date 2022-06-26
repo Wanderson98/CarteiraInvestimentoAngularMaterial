@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace CarteiraInvestimentosApi.Migrations
 {
-    public partial class InitialCarteiraInvestismentosDatabase : Migration
+    public partial class CarteiraApiInicialDataBase : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -28,7 +28,7 @@ namespace CarteiraInvestimentosApi.Migrations
                 {
                     IndexadorRendimentosId = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    IndexadorRendimentosNome = table.Column<int>(type: "INTEGER", maxLength: 100, nullable: false)
+                    IndexadorRendimentosNome = table.Column<string>(type: "TEXT", maxLength: 100, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -163,10 +163,11 @@ namespace CarteiraInvestimentosApi.Migrations
                     RendaFixaId = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     NomeRendaFixa = table.Column<string>(type: "TEXT", nullable: true),
-                    Rentabilidae = table.Column<decimal>(type: "TEXT", nullable: false),
+                    Rentabilidade = table.Column<decimal>(type: "TEXT", nullable: false),
                     Rendimento = table.Column<decimal>(type: "TEXT", nullable: false),
                     Vencimento = table.Column<DateTime>(type: "TEXT", nullable: false),
                     Liquidez = table.Column<string>(type: "TEXT", nullable: true),
+                    IsActive = table.Column<bool>(type: "INTEGER", nullable: false),
                     Custos = table.Column<decimal>(type: "TEXT", nullable: false),
                     CarteiraId = table.Column<int>(type: "INTEGER", nullable: false),
                     BancoId = table.Column<int>(type: "INTEGER", nullable: false),
@@ -253,6 +254,7 @@ namespace CarteiraInvestimentosApi.Migrations
                     Rentabilidade = table.Column<decimal>(type: "TEXT", nullable: false),
                     Vencimento = table.Column<DateTime>(type: "TEXT", nullable: false),
                     Liquidez = table.Column<string>(type: "TEXT", nullable: true),
+                    IsActive = table.Column<bool>(type: "INTEGER", nullable: false),
                     Custos = table.Column<decimal>(type: "TEXT", nullable: false),
                     CarteiraId = table.Column<int>(type: "INTEGER", nullable: false),
                     BancoId = table.Column<int>(type: "INTEGER", nullable: false),
@@ -303,20 +305,17 @@ namespace CarteiraInvestimentosApi.Migrations
                         name: "FK_Movimentacoes_Poupancas_PoupancaId",
                         column: x => x.PoupancaId,
                         principalTable: "Poupancas",
-                        principalColumn: "PoupancaId",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "PoupancaId");
                     table.ForeignKey(
                         name: "FK_Movimentacoes_RendaFixas_RendaFixaId",
                         column: x => x.RendaFixaId,
                         principalTable: "RendaFixas",
-                        principalColumn: "RendaFixaId",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "RendaFixaId");
                     table.ForeignKey(
                         name: "FK_Movimentacoes_RendaVariaveis_RendaVariavelId",
                         column: x => x.RendaVariavelId,
                         principalTable: "RendaVariaveis",
-                        principalColumn: "RendaVariavelId",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "RendaVariavelId");
                     table.ForeignKey(
                         name: "FK_Movimentacoes_StatusMovimentacoes_StatusMovimentacaoId",
                         column: x => x.StatusMovimentacaoId,
@@ -327,8 +326,7 @@ namespace CarteiraInvestimentosApi.Migrations
                         name: "FK_Movimentacoes_TesouroDiretos_TesouroDiretoId",
                         column: x => x.TesouroDiretoId,
                         principalTable: "TesouroDiretos",
-                        principalColumn: "TesouroDiretoId",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "TesouroDiretoId");
                 });
 
             migrationBuilder.CreateIndex(

@@ -9,14 +9,15 @@
 
         public int StatusMovimentacaoId { get; set; }
         public StatusMovimentacao StatusMovimentacao { get; set; }
-        public int RendaVariavelId { get; set; }
+
+        public int? RendaVariavelId { get; set; }
         public RendaVariavel RendaVariavel { get; set; }
-        public int RendaFixaId { get; set; }
+        public int? RendaFixaId { get; set; }
         public RendaFixa RendaFixa { get; set; }
-        public int TesouroDiretoId { get; set; }
+        public int? TesouroDiretoId { get; set; }
         public TesouroDireto TesouroDireto { get; set; }
 
-        public int PoupancaId { get; set; }
+        public int? PoupancaId { get; set; }
         public Poupanca Poupanca { get; set; }
     }
 }

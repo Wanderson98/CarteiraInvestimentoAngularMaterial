@@ -100,19 +100,19 @@ namespace CarteiraInvestimentosApi.Migrations
                     b.Property<DateTime>("DataMovimentacao")
                         .HasColumnType("TEXT");
 
-                    b.Property<int>("PoupancaId")
+                    b.Property<int?>("PoupancaId")
                         .HasColumnType("INTEGER");
 
-                    b.Property<int>("RendaFixaId")
+                    b.Property<int?>("RendaFixaId")
                         .HasColumnType("INTEGER");
 
-                    b.Property<int>("RendaVariavelId")
+                    b.Property<int?>("RendaVariavelId")
                         .HasColumnType("INTEGER");
 
                     b.Property<int>("StatusMovimentacaoId")
                         .HasColumnType("INTEGER");
 
-                    b.Property<int>("TesouroDiretoId")
+                    b.Property<int?>("TesouroDiretoId")
                         .HasColumnType("INTEGER");
 
                     b.Property<int>("Unidades")
@@ -413,21 +413,15 @@ namespace CarteiraInvestimentosApi.Migrations
                 {
                     b.HasOne("CarteiraInvestimentosApi.Models.Poupanca", "Poupanca")
                         .WithMany("Movimentacoes")
-                        .HasForeignKey("PoupancaId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("PoupancaId");
 
                     b.HasOne("CarteiraInvestimentosApi.Models.RendaFixa", "RendaFixa")
                         .WithMany("Movimentacoes")
-                        .HasForeignKey("RendaFixaId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("RendaFixaId");
 
                     b.HasOne("CarteiraInvestimentosApi.Models.RendaVariavel", "RendaVariavel")
                         .WithMany("Movimentacoes")
-                        .HasForeignKey("RendaVariavelId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("RendaVariavelId");
 
                     b.HasOne("CarteiraInvestimentosApi.Models.StatusMovimentacao", "StatusMovimentacao")
                         .WithMany("Movimentacoes")
@@ -437,9 +431,7 @@ namespace CarteiraInvestimentosApi.Migrations
 
                     b.HasOne("CarteiraInvestimentosApi.Models.TesouroDireto", "TesouroDireto")
                         .WithMany("Movimentacoes")
-                        .HasForeignKey("TesouroDiretoId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("TesouroDiretoId");
 
                     b.Navigation("Poupanca");
 
