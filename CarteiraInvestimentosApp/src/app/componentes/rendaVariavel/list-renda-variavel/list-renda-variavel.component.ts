@@ -61,7 +61,7 @@ export class ListRendaVariavelComponent implements OnInit {
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
     
-    this.pegarProdutoParaSerAtualizado(this.rendaVariavel);// tá comentado para economizar request se quiser testar só descomentar os campos marcados
+    //this.pegarProdutoParaSerAtualizado(this.rendaVariavel);// tá comentado para economizar request se quiser testar só descomentar os campos marcados
 
     });
   }
