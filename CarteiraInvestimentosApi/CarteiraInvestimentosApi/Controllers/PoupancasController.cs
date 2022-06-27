@@ -29,7 +29,7 @@ namespace CarteiraInvestimentosApi.Controllers
             return await _context.Poupancas.Include(c => c.Carteira).Include(c => c.Banco).ToListAsync();
         }
 
-        
+        [HttpGet("valor/")]
         public async Task<ActionResult<IEnumerable<PoupancaApp>>> GetPoupancasValor()
         {
             var poupancas =  await _context.Poupancas.Include(c=>c.Carteira).Include(c=>c.Banco).ToListAsync();

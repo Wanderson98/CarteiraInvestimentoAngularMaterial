@@ -24,6 +24,13 @@ namespace CarteiraInvestimentosApi.Controllers
 
         // GET: api/RendaFixas
         [HttpGet]
+        public async Task<ActionResult<IEnumerable<RendaFixa>>> GetPoupancas()
+        {
+            return await _context.RendaFixas.Include(c => c.Movimentacoes).Include(c => c.Carteira).Include(c => c.ProdutoRendaFixa).
+               Include(c => c.IndexadorRendimentos).Include(c => c.Banco).ToListAsync();
+        }
+
+        [HttpGet("valor/")]
         public async Task<ActionResult<IEnumerable<RendaFixaApp>>> GetRendaFixas()
         {
             var rendafixa = await _context.RendaFixas.Include(c => c.Movimentacoes).Include(c => c.Carteira).Include(c => c.ProdutoRendaFixa).

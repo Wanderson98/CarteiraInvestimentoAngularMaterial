@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using CarteiraInvestimentosApi.Data;
 using CarteiraInvestimentosApi.Models;
+using CarteiraInvestimentosApi.DataApp;
 
 namespace CarteiraInvestimentosApi.Controllers
 {
@@ -28,6 +29,27 @@ namespace CarteiraInvestimentosApi.Controllers
             return await _context.RendaVariaveis.Include(c => c.Movimentacoes).Include(c => c.Banco).Include(c => c.ProdutoRendaVariavel)
                 .Include(c => c.Carteira).Include(c=>c.Banco).ToListAsync();
         }
+
+        [HttpGet("valor/")]
+        public async Task<ActionResult<IEnumerable<RendaVariavelApp>>> GetRendaVariaveisValor()
+        {
+            var variaveis = await _context.RendaVariaveis.Include(c => c.Movimentacoes).Include(c => c.Banco).Include(c => c.ProdutoRendaVariavel)
+                .Include(c => c.Carteira).Include(c => c.Banco).ToListAsync();
+            List<RendaVariavelApp> rendaVariavelApps = new List<RendaVariavelApp>();
+            foreach(var item in variaveis)
+            {
+                AtualizarValores(item);
+                rendaVariavelApps.Add(new RendaVariavelApp()
+                {
+                    RendaVariavel = item,
+                    ValorTotal = item.CotacaoAtual * item.Unidades
+                }) ;
+
+
+            }
+            return Ok(rendaVariavelApps);
+        }
+
 
         // GET: api/RendaVariavels/5
         [HttpGet("{id}")]
@@ -131,6 +153,13 @@ namespace CarteiraInvestimentosApi.Controllers
         private bool RendaVariavelExists(int id)
         {
             return _context.RendaVariaveis.Any(e => e.RendaVariavelId == id);
+        }
+
+        private void AtualizarValores(RendaVariavel item)
+        {
+            item.Rendimento = (item.CotacaoAtual * item.Unidades) - (item.CotacaoMedia * item.Unidades);
+            _context.RendaVariaveis.Update(item);
+            _context.SaveChanges();
         }
     }
 }

@@ -24,6 +24,13 @@ namespace CarteiraInvestimentosApi.Controllers
 
         // GET: api/TesouroDiretos
         [HttpGet]
+        public async Task<ActionResult<IEnumerable<TesouroDireto>>> GetPoupancas()
+        {
+            return await _context.TesouroDiretos.Include(c => c.Banco).Include(c => c.Carteira).Include(c => c.IndexadorRendimentos).
+                Include(c => c.Movimentacoes).ToListAsync();
+        }
+
+        [HttpGet("valor/")]
         public async Task<ActionResult<IEnumerable<TesouroDiretoApp>>> GetTesouroDiretos()
         {
             List<TesouroDiretoApp> tesouroDiretoApps = new List<TesouroDiretoApp>();
