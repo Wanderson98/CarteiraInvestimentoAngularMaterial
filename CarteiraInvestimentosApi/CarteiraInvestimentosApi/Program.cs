@@ -1,5 +1,7 @@
 using System.Text.Json.Serialization;
 using CarteiraInvestimentosApi.Data;
+using CarteiraInvestimentosApi.DataApp;
+
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);

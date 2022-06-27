@@ -3,4 +3,9 @@ export class Carteira{
     carteiraNome!: string;
     dataInicial!: Date;
     usuarioId!: number;
+    valorTotalCarteira!: number;
+    valorTotalPoupanca!: number;
+    valorTotalRendaFixa!: number;
+    valorTotalRendaVariavel!: number;
+    valorTotalTesouroDireto!: number;
 }

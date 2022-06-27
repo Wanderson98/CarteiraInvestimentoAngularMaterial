@@ -1,3 +1,4 @@
+import { CadastroComponent } from './../cadastro/cadastro.component';
 import { AddEditPoupancaComponent } from './../add-edit-poupanca/add-edit-poupanca.component';
 import { PoupancaService } from './../../../services/poupanca.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
@@ -17,7 +18,7 @@ export class ListPoupancaComponent implements OnInit {
 
   constructor(public dialog: MatDialog, private service: PoupancaService, private toastr: ToastrService) { }
 
-  displayedColumns: string[] = ['poupancaId', 'valorTotalInvestido', 'rendimento',
+  displayedColumns: string[] = ['poupancaId', 'valorTotalInvestido', 'valorTotal','rendimento',
   'isActive', 'carteiraNome','bancoNome', 'action'];
   dataSource!: MatTableDataSource<any>;
 
@@ -38,9 +39,18 @@ export class ListPoupancaComponent implements OnInit {
     });
 
   }
-
+  
+  openDialogCadastro(){
+    const dialogRef = this.dialog.open(CadastroComponent,{
+      width: '40%',
+    }).afterClosed().subscribe(val =>{
+      if(val === 'salvo'){
+        this.ListarTodosPoupanca();
+      }
+    });
+  }
   ListarTodosPoupanca(){
-    this.service.pegarTodos().subscribe(result => {
+    this.service.pegarTodosValor().subscribe(result => {
     this.dataSource = new MatTableDataSource(result);
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;

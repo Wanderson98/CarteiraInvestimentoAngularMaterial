@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using CarteiraInvestimentosApi.Data;
 using CarteiraInvestimentosApi.Models;
+using CarteiraInvestimentosApi.DataApp;
 
 namespace CarteiraInvestimentosApi.Controllers
 {
@@ -23,11 +24,25 @@ namespace CarteiraInvestimentosApi.Controllers
 
         // GET: api/RendaFixas
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<RendaFixa>>> GetRendaFixas()
+        public async Task<ActionResult<IEnumerable<RendaFixaApp>>> GetRendaFixas()
         {
-            return await _context.RendaFixas.Include(c => c.Movimentacoes).Include(c => c.Carteira).Include(c => c.ProdutoRendaFixa).
+            var rendafixa = await _context.RendaFixas.Include(c => c.Movimentacoes).Include(c => c.Carteira).Include(c => c.ProdutoRendaFixa).
                Include(c => c.IndexadorRendimentos).Include(c => c.Banco).ToListAsync();
+            List<RendaFixaApp> rendaFixaApps = new List<RendaFixaApp>();
+            foreach (var item in rendafixa)
+            {
+                rendaFixaApps.Add(new RendaFixaApp()
+                {
+                    RendaFixa = item,
+                    ValorTotal = item.ValorTotalInvestido + item.Rendimento
+                });
+            };
+
+            return rendaFixaApps;
         }
+
+
+
 
         // GET: api/RendaFixas/5
         [HttpGet("{id}")]
@@ -70,9 +85,9 @@ namespace CarteiraInvestimentosApi.Controllers
 
             return Ok(rendaFixa);
         }
-            // PUT: api/RendaFixas/5
-            // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-            [HttpPut("{id}")]
+        // PUT: api/RendaFixas/5
+        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        [HttpPut("{id}")]
         public async Task<IActionResult> PutRendaFixa(int id, RendaFixa rendaFixa)
         {
             if (id != rendaFixa.RendaFixaId)

@@ -22,6 +22,10 @@ export class PoupancaService {
   pegarTodos(): Observable<Poupanca[]> {
     return this.http.get<Poupanca[]>(this.url, httpOptions)
   }
+  pegarTodosValor(): Observable<Poupanca[]> {
+    const url = `${this.url}/valor`;
+    return this.http.get<Poupanca[]>(url, httpOptions)
+  }
   pegarPorId(poupancaId: number): Observable<Poupanca> {
     const url = `${this.url}/${poupancaId}`;
     return this.http.get<Poupanca>(url, httpOptions)

@@ -56,6 +56,7 @@
             <mat-label> Carteira</mat-label>
             <mat-select formControlName="carteiraId" placeholder="Usuario" >
                 <div *ngFor="let u of carteiras">
+
                     <mat-option [value]="u.carteiraId"> {{ u.carteiraNome}} </mat-option>
                 </div>
             </mat-select>

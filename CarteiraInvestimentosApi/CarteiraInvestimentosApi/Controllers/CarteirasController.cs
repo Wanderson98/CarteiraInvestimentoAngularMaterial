@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using CarteiraInvestimentosApi.Data;
 using CarteiraInvestimentosApi.Models;
+using CarteiraInvestimentosApi.DataApp;
 
 namespace CarteiraInvestimentosApi.Controllers
 {
@@ -15,31 +16,64 @@ namespace CarteiraInvestimentosApi.Controllers
     public class CarteirasController : ControllerBase
     {
         private readonly DataContext _context;
+       
 
         public CarteirasController(DataContext context)
         {
             _context = context;
+          
         }
 
         // GET: api/Carteiras
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Carteira>>> GetCarteiras()
         {
-            return await _context.Carteiras.Include(c=>c.Usuario).ToListAsync();
+           
+            return await _context.Carteiras.Include(c => c.Usuario).ToListAsync();
+        }
+
+        [HttpGet("cart/")]
+        public async Task<ActionResult<IEnumerable<CarteiraApp>>> GetCarteirasApp() 
+        {
+            List<CarteiraApp> carteiraApps = new List<CarteiraApp>();
+            var carteiras = await _context.Carteiras.Include(c => c.Usuario).ToListAsync();
+            foreach (var item in carteiras)
+            {
+                carteiraApps.Add(new CarteiraApp()
+                {
+                    Carteira = item,
+                    ValorTotalPoupanca = ValorTotalPoup(item),
+                    ValorTotalRendaFixa = ValorTotalRFixa(item),
+                    ValorTotalTesouroDireto = ValorTotalTesouDireto(item),
+                    ValorTotalRendaVariavel = ValorTotalRVariavel(item),
+                    ValorTotalCarteira = ValorTotal(item)
+                });
+
+            };
+            return carteiraApps;
+
         }
 
         // GET: api/Carteiras/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Carteira>> GetCarteira(int id)
+        public async Task<ActionResult<CarteiraApp>> GetCarteira(int id)
         {
             var carteira = await _context.Carteiras.FindAsync(id);
-
+            var carteiraApp = new CarteiraApp()
+            {
+                Carteira = carteira,
+                ValorTotalPoupanca = ValorTotalPoup(carteira),
+                ValorTotalRendaFixa = ValorTotalRFixa(carteira),
+                ValorTotalTesouroDireto = ValorTotalTesouDireto(carteira),
+                ValorTotalRendaVariavel = ValorTotalRVariavel(carteira),
+                ValorTotalCarteira = ValorTotal(carteira)
+            };
             if (carteira == null)
             {
                 return NotFound();
             }
 
-            return carteira;
+            return Ok(carteiraApp);
         }
 
         // PUT: api/Carteiras/5
@@ -104,5 +138,58 @@ namespace CarteiraInvestimentosApi.Controllers
         {
             return _context.Carteiras.Any(e => e.CarteiraId == id);
         }
+
+        private decimal ValorTotalPoup(Carteira carteira)
+        {
+            decimal valorPoupanca = 0;
+            var poupanca = _context.Poupancas.Where(c => c.CarteiraId == carteira.CarteiraId);
+            foreach (var item in poupanca)
+            {
+                valorPoupanca += item.ValorTotalInvestido + item.Rendimento;
+            }
+
+
+            return valorPoupanca;
+        }
+
+        private decimal ValorTotalRFixa(Carteira carteira)
+        {
+            decimal valorRendaFixa = 0;
+            var rendaFixa = _context.RendaFixas.Where(c => c.CarteiraId == carteira.CarteiraId);
+            foreach (var item in rendaFixa)
+            {
+                valorRendaFixa += (item.ValorTotalInvestido + item.Rendimento);
+            }
+
+            return valorRendaFixa;
+        }
+        private decimal ValorTotalTesouDireto(Carteira carteira)
+        {
+            decimal valorTesouroDireto = 0;
+            var tesouroDireto = _context.TesouroDiretos.Where(c => c.CarteiraId == carteira.CarteiraId);
+            foreach (var item in tesouroDireto)
+            {
+                valorTesouroDireto += (item.ValorTotalInvestido + item.Rendimento);
+            }
+
+            return valorTesouroDireto;
+        }
+        private decimal ValorTotalRVariavel(Carteira carteira)
+        {
+            decimal valorRendaVariavel = 0;
+            var rendaVariavel = _context.RendaVariaveis.Where(c => c.CarteiraId == carteira.CarteiraId);
+            foreach (var item in rendaVariavel)
+            {
+                valorRendaVariavel += (item.Unidades * item.CotacaoAtual);
+            }
+
+            return valorRendaVariavel;
+        }
+        private decimal ValorTotal(Carteira carteira)
+        {
+            return ValorTotalRVariavel(carteira) + ValorTotalTesouDireto(carteira) +
+                ValorTotalRFixa(carteira) + ValorTotalPoup(carteira);
+        }
+
     }
 }

@@ -54,7 +54,8 @@ export class AddEditRendaFixaComponent implements OnInit {
     this.rendaFixaForm = this.formBuilder.group({
       tesouroDiretoId : ['', Validators.required],
       nomeRendaFixa : ['', Validators.required],
-      rendimento : ['', Validators.required,],
+      valorTotalInvestido : ['', Validators.required],
+      rendimento : ['', Validators.required],
       rentabilidade : ['', Validators.required],
       vencimento : ['', ],
       isActive : ['', Validators.required],
@@ -69,17 +70,18 @@ export class AddEditRendaFixaComponent implements OnInit {
 
     if(this.editData){
       this.actionBtn = "Atualizar";
-      this.rendaFixaForm.controls['nomeRendaFixa'].setValue(this.editData.nomeRendaFixa);
-       this.rendaFixaForm.controls['rendimento'].setValue(this.editData.rendimento),
-       this.rendaFixaForm.controls['rentabilidade'].setValue(this.editData.rentabilidade),
-       this.rendaFixaForm.controls['vencimento'].setValue(this.editData.vencimento),
-       this.rendaFixaForm.controls['isActive'].setValue(this.editData.isActive),
-       this.rendaFixaForm.controls['liquidez'].setValue(this.editData.liquidez),
-       this.rendaFixaForm.controls['custos'].setValue(this.editData.custos),
-       this.rendaFixaForm.controls['carteiraId'].setValue(this.editData.carteiraId);
-       this.rendaFixaForm.controls['produtoRendaFixaId'].setValue(this.editData.produtoRendaFixaId);
-       this.rendaFixaForm.controls['bancoId'].setValue(this.editData.bancoId);
-       this.rendaFixaForm.controls['indexadorRendimentosId'].setValue(this.editData.indexadorRendimentosId)
+      this.rendaFixaForm.controls['nomeRendaFixa'].setValue(this.editData.rendaFixa.nomeRendaFixa);
+       this.rendaFixaForm.controls['rendimento'].setValue(this.editData.rendaFixa.rendimento),
+       this.rendaFixaForm.controls['rentabilidade'].setValue(this.editData.rendaFixa.rentabilidade * 100),
+       this.rendaFixaForm.controls['vencimento'].setValue(this.editData.rendaFixa.vencimento),
+       this.rendaFixaForm.controls['valorTotalInvestido'].setValue(this.editData.rendaFixa.valorTotalInvestido),
+       this.rendaFixaForm.controls['isActive'].setValue(this.editData.rendaFixa.isActive),
+       this.rendaFixaForm.controls['liquidez'].setValue(this.editData.rendaFixa.liquidez),
+       this.rendaFixaForm.controls['custos'].setValue(this.editData.rendaFixa.custos),
+       this.rendaFixaForm.controls['carteiraId'].setValue(this.editData.rendaFixa.carteiraId);
+       this.rendaFixaForm.controls['produtoRendaFixaId'].setValue(this.editData.rendaFixa.produtoRendaFixaId);
+       this.rendaFixaForm.controls['bancoId'].setValue(this.editData.rendaFixa.bancoId);
+       this.rendaFixaForm.controls['indexadorRendimentosId'].setValue(this.editData.rendaFixa.indexadorRendimentosId)
     }
   }
 
@@ -99,7 +101,7 @@ export class AddEditRendaFixaComponent implements OnInit {
         }
       })
     } else{
-      rendaFixa.rendaFixaId = this.editData.rendaFixaId
+      rendaFixa.rendaFixaId = this.editData.rendaFixa.rendaFixaId
       this.service.atualizarRendaFixa(rendaFixa).subscribe({
         next:(res) => {
             this.toastr.warning('Atualizando!', 'Atualizado com Sucesso!');

@@ -59,17 +59,19 @@ export class AddEditTesouroDiretoComponent implements OnInit {
     });
 
     if(this.editData){
+     
       this.actionBtn = "Atualizar";
-      this.tesouroForm.controls['valorTotalInvestido'].setValue(this.editData.valorTotalInvestido);
-       this.tesouroForm.controls['rendimento'].setValue(this.editData.rendimento),
-       this.tesouroForm.controls['rentabilidade'].setValue(this.editData.rentabilidade),
-       this.tesouroForm.controls['vencimento'].setValue(this.editData.vencimento),
-       this.tesouroForm.controls['isActive'].setValue(this.editData.isActive),
-       this.tesouroForm.controls['liquidez'].setValue(this.editData.liquidez),
-       this.tesouroForm.controls['custos'].setValue(this.editData.custos),
-       this.tesouroForm.controls['carteiraId'].setValue(this.editData.carteiraId);
-       this.tesouroForm.controls['bancoId'].setValue(this.editData.bancoId);
-       this.tesouroForm.controls['indexadorRendimentosId'].setValue(this.editData.indexadorRendimentosId)
+      
+      this.tesouroForm.controls['valorTotalInvestido'].setValue(this.editData.tesouroDireto.valorTotalInvestido);
+       this.tesouroForm.controls['rendimento'].setValue(this.editData.tesouroDireto.rendimento),
+       this.tesouroForm.controls['rentabilidade'].setValue(this.editData.tesouroDireto.rentabilidade * 100),
+       this.tesouroForm.controls['vencimento'].setValue(this.editData.tesouroDireto.vencimento),
+       this.tesouroForm.controls['isActive'].setValue(this.editData.tesouroDireto.isActive),
+       this.tesouroForm.controls['liquidez'].setValue(this.editData.tesouroDireto.liquidez),
+       this.tesouroForm.controls['custos'].setValue(this.editData.tesouroDireto.custos),
+       this.tesouroForm.controls['carteiraId'].setValue(this.editData.tesouroDireto.carteiraId);
+       this.tesouroForm.controls['bancoId'].setValue(this.editData.tesouroDireto.bancoId);
+       this.tesouroForm.controls['indexadorRendimentosId'].setValue(this.editData.tesouroDireto.indexadorRendimentosId)
     }
   }
 
@@ -88,7 +90,7 @@ export class AddEditTesouroDiretoComponent implements OnInit {
         }
       })
     } else{
-      TesouroDireto.tesouroDiretoId = this.editData.tesouroDiretoId
+      TesouroDireto.tesouroDiretoId = this.editData.tesouroDireto.tesouroDiretoId
       this.service.atualizarTesouro(TesouroDireto).subscribe({
         next:(res) => {
             this.toastr.warning('Atualizando!', 'Atualizado com Sucesso!');

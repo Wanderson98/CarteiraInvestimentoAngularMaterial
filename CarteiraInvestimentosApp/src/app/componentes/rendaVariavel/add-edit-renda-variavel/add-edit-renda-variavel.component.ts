@@ -43,6 +43,7 @@ export class AddEditRendaVariavelComponent implements OnInit {
 
     this.cartService.ListarTodos().subscribe(data => {
       this.carteiras = data;
+      console.log(this.carteiras);
     });
 
     this.produtoRVService.pegarTodos().subscribe(data => {
@@ -78,6 +79,8 @@ export class AddEditRendaVariavelComponent implements OnInit {
        this.rendaVariavelForm.controls['bancoId'].setValue(this.editData.bancoId);
 
     }
+
+   
   }
  //metodo para salvar ou atualizar os dados
   EnviarFormulario(): void{

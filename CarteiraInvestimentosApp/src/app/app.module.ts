@@ -36,6 +36,7 @@ import { ListPoupancaComponent } from './componentes/poupanca/list-poupanca/list
 import { AddEditPoupancaComponent } from './componentes/poupanca/add-edit-poupanca/add-edit-poupanca.component';
 import { AddEditMovimentacaoComponent } from './componentes/movimentacao/add-edit-movimentacao/add-edit-movimentacao.component';
 import { ListMovimentacaoComponent } from './componentes/movimentacao/list-movimentacao/list-movimentacao.component';
+import { CadastroComponent } from './componentes/poupanca/cadastro/cadastro.component';
 
 
 @NgModule({
@@ -69,6 +70,7 @@ import { ListMovimentacaoComponent } from './componentes/movimentacao/list-movim
     AddEditPoupancaComponent,
     AddEditMovimentacaoComponent,
     ListMovimentacaoComponent,
+    CadastroComponent,
    
   ],
   imports: [

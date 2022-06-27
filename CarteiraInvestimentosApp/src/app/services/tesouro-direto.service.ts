@@ -22,6 +22,10 @@ export class TesouroDiretoService {
   pegarTodos(): Observable<TesouroDireto[]> {
     return this.http.get<TesouroDireto[]>(this.urlApi, httpOptions)
   }
+  pegarTodosValor(): Observable<TesouroDireto[]> {
+    const url = `${this.urlApi}/valor`;
+    return this.http.get<TesouroDireto[]>(url, httpOptions)
+  }
   pegarPorId(tesouroId: number): Observable<TesouroDireto> {
     const url = `${this.urlApi}/${tesouroId}`;
     return this.http.get<TesouroDireto>(url, httpOptions)

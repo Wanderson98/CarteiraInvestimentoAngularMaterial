@@ -22,7 +22,7 @@ export class ListRendaVariavelComponent implements OnInit {
     private apiService: AtualizarRendaVariavelService
     ) {   }
 //display das colunas da tabela material
-  displayedColumns: string[] = ['rendaVariavelId', 'nomeDoPapel', 'unidades','cotacaoMedia','cotacaoAtual',
+  displayedColumns: string[] = ['rendaVariavelId', 'nomeDoPapel', 'unidades','valorTotal','cotacaoMedia','cotacaoAtual',
   'isActive', 'rendimento', 'custos','carteiraNome','bancoNome', 'produtoRendaVariavelNome', 'action'];
   //dataSource que vai enviar os dados para a tabela
   dataSource!: MatTableDataSource<any>;
@@ -54,14 +54,14 @@ export class ListRendaVariavelComponent implements OnInit {
   }
   //metodo para pegar os dados
   ListarTodosRendaVariavel(){
-    this.service.pegarTodos().subscribe(result => {
+    this.service.pegarTodosValor().subscribe(result => {
     this.rendaVariavel = result;
     //atribui os dados recebitos para o datasource que vai ser exibido
     this.dataSource = new MatTableDataSource(this.rendaVariavel);
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
     
-   // this.pegarProdutoParaSerAtualizado(this.rendaVariavel);// tá comentado para economizar request se quiser testar só descomentar os campos marcados
+    this.pegarProdutoParaSerAtualizado(this.rendaVariavel);// tá comentado para economizar request se quiser testar só descomentar os campos marcados
 
     });
   }
@@ -94,35 +94,37 @@ export class ListRendaVariavelComponent implements OnInit {
   //for que percorre os produtos que vieram pelo metodo
   for(var product in produto){
     //busca um produto para er atualizado pelo ID
-    this.service.pegarPorId(produto[product].rendaVariavelId).subscribe(data => {
+    this.service.pegarPorId(produto[product].rendaVariavel.rendaVariavelId).subscribe(data => {
     //atribui o produto recebido
     this.atualizarValor = data;
     //passa o produto recebido para outro metodo que vai atualizar o valor da cotaçao atual
-    //this.atualizarValorProduto(this.atualizarValor)// - descomentar para usar
+      this.atualizarValorProduto(this.atualizarValor)// - descomentar para usar
       })
 
 
   }}
 //metodo para atualizar o valor da cotacao atual
-  // atualizarValorProduto(produto : RendaVariavel){  //- descomentar para usar
-  //   //busca pela api externa os dados pelo nome do papel
-  //     this.apiService.PegarValorAtual(produto.nomeDoPapel).subscribe(data => { // - descomentar para usar
-  //     this.valorAtual = data; // - descomentar para usar
-  //    //atribui o valor recebido pela api externa para o produto recebido no metodo
-  //     produto.cotacaoAtual = this.valorAtual[0].price.last.value;  //- descomentar para usar
+   atualizarValorProduto(produto : RendaVariavel){  //- descomentar para usar
+     //busca pela api externa os dados pelo nome do papel
+      this.apiService.PegarValorAtual(produto.nomeDoPapel).subscribe(data => { // - descomentar para usar
+       this.valorAtual = data; // - descomentar para usar
+      //atribui o valor recebido pela api externa para o produto recebido no metodo
+       produto.cotacaoAtual = this.valorAtual[0].price.last.value;  //- descomentar para usar
   //    //atualiza o produto como o valor atualizado no banco de dados
-  //     this.service.atualizarRendaVariavel(produto).subscribe({ // - descomentar para usar
-  //       next:(res) => { - descomentar para usar
+       this.service.atualizarRendaVariavel(produto).subscribe({ // - descomentar para usar
+         next:(res) => { -// descomentar para usar
   //         //atualiza a lista novamente com os dados atualizados
-  //         this.ListarTodosRendaVariavel() //- descomentar para usar
-  //       }, //- descomentar para usar
-  //       error:()=> { - descomentar para usar
+         
+          console.log("ok") //- descomentar para usar
+         }, //- descomentar para usar
+         error:()=> { -// descomentar para usar
   //         //se der erro ele vai dar um aviso
-  //         this.toastr.error('Algo deu errado', 'Error na atualização dos valores')// - descomentar para usar
-  //       } //- descomentar para usar
-  //     })// - descomentar para usar
-  //   }); //- descomentar para usar
-
+           this.toastr.error('Algo deu errado', 'Error na atualização dos valores')// - descomentar para usar
+        } //- descomentar para usar
+      })// - descomentar para usar
+    }); //- descomentar para usar
+  }
+ 
   //metodo para o filtro
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;

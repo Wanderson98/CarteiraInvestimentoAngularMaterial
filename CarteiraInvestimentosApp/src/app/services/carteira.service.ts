@@ -16,7 +16,13 @@ export class CarteiraService {
   constructor(private http: HttpClient) { }
 
    ListarTodos(): Observable<Carteira[]>{
+    
     return this.http.get<Carteira[]>(this.url);
+   }
+
+   ListarTodosValor(): Observable<Carteira[]>{
+    const apiUrl = `${this.url}/cart`;
+    return this.http.get<Carteira[]>(apiUrl);
    }
 
    ListarPeloId(carteiraId: number): Observable<Carteira>{

@@ -52,11 +52,11 @@ export class AddEditPoupancaComponent implements OnInit {
 
     if(this.editData){
       this.actionBtn = "Atualizar";
-      this.poupancaForm.controls['valorTotalInvestido'].setValue(this.editData.valorTotalInvestido);
-       this.poupancaForm.controls['rendimento'].setValue(this.editData.rendimento),
-       this.poupancaForm.controls['isActive'].setValue(this.editData.isActive),
-       this.poupancaForm.controls['carteiraId'].setValue(this.editData.carteiraId);
-       this.poupancaForm.controls['bancoId'].setValue(this.editData.bancoId);
+      this.poupancaForm.controls['valorTotalInvestido'].setValue(this.editData.poupanca.valorTotalInvestido);
+       this.poupancaForm.controls['rendimento'].setValue(this.editData.poupanca.rendimento),
+       this.poupancaForm.controls['isActive'].setValue(this.editData.poupanca.isActive),
+       this.poupancaForm.controls['carteiraId'].setValue(this.editData.poupanca.carteiraId);
+       this.poupancaForm.controls['bancoId'].setValue(this.editData.poupanca.bancoId);
 
     }
   }
@@ -76,7 +76,7 @@ export class AddEditPoupancaComponent implements OnInit {
         }
       })
     } else{
-      poupanca.poupancaId = this.editData.poupancaId
+      poupanca.poupancaId = this.editData.poupanca.poupancaId
       this.service.atualizarPoupanca(poupanca).subscribe({
         next:(res) => {
             this.toastr.warning('Atualizando!', 'Atualizado com Sucesso!');

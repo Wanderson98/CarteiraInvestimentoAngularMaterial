@@ -17,7 +17,7 @@ export class ListTesouroDiretoComponent implements OnInit {
 
   constructor(public dialog: MatDialog, private service: TesouroDiretoService,  private toastr: ToastrService) { }
 
-  displayedColumns: string[] = ['tesouroDiretoId', 'valorTotalInvestido', 'rendimento','rentabilidade','vencimento',
+  displayedColumns: string[] = ['tesouroDiretoId', 'valorTotalInvestido', 'valorTotal','rendimento','rentabilidade','vencimento',
   'isActive', 'liquidez', 'custos','carteiraNome','bancoNome','indexadorRendimentosNome', 'action'];
   dataSource!: MatTableDataSource<any>;
 
@@ -40,7 +40,7 @@ export class ListTesouroDiretoComponent implements OnInit {
   }
 
   ListarTodosTesouro(){
-    this.service.pegarTodos().subscribe(result => {
+    this.service.pegarTodosValor().subscribe(result => {
     this.dataSource = new MatTableDataSource(result);
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
@@ -49,6 +49,7 @@ export class ListTesouroDiretoComponent implements OnInit {
   }
 
   editarTesouro(row : any){
+    
     this.dialog.open(AddEditTesouroDiretoComponent, {
       width: '40%',
       data: row

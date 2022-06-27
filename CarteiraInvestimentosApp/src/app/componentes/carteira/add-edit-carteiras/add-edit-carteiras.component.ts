@@ -39,9 +39,9 @@ export class AddEditCarteirasComponent implements OnInit {
 
     if(this.editData){
       this.actionBtn = "Atualizar";
-      this.carteiraForm.controls['carteiraNome'].setValue(this.editData.carteiraNome);
-      this.carteiraForm.controls['dataInicial'].setValue(this.editData.dataInicial);
-      this.carteiraForm.controls['usuarioId'].setValue(this.editData.usuarioId);
+      this.carteiraForm.controls['carteiraNome'].setValue(this.editData.carteira.carteiraNome);
+      this.carteiraForm.controls['dataInicial'].setValue(this.editData.carteira.dataInicial);
+      this.carteiraForm.controls['usuarioId'].setValue(this.editData.carteira.usuarioId);
      
     }
   }
@@ -62,7 +62,7 @@ export class AddEditCarteirasComponent implements OnInit {
         }
       })
     } else{
-      carteira.carteiraId = this.editData.carteiraId
+      carteira.carteiraId = this.editData.carteira.carteiraId
       this.service.AtualizarCarteira(carteira).subscribe({
         next:(res) => {
             this.toastr.warning('Atualizando!', 'Atualizado com Sucesso!');

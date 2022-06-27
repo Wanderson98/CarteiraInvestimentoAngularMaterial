@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using CarteiraInvestimentosApi.Data;
 using CarteiraInvestimentosApi.Models;
+using CarteiraInvestimentosApi.DataApp;
 
 namespace CarteiraInvestimentosApi.Controllers
 {
@@ -25,7 +26,24 @@ namespace CarteiraInvestimentosApi.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Poupanca>>> GetPoupancas()
         {
-            return await _context.Poupancas.Include(c=>c.Carteira).Include(c=>c.Banco).ToListAsync();
+            return await _context.Poupancas.Include(c => c.Carteira).Include(c => c.Banco).ToListAsync();
+        }
+
+        
+        public async Task<ActionResult<IEnumerable<PoupancaApp>>> GetPoupancasValor()
+        {
+            var poupancas =  await _context.Poupancas.Include(c=>c.Carteira).Include(c=>c.Banco).ToListAsync();
+            List<PoupancaApp> poupancaApps = new List<PoupancaApp>();
+            foreach (var item in poupancas)
+            {
+                poupancaApps.Add(new PoupancaApp()
+                {
+                    Poupanca = item,
+                    ValorTotal = item.ValorTotalInvestido + item.Rendimento
+                }) ; 
+
+            }
+            return Ok(poupancaApps);
         }
 
         // GET: api/Poupancas/5

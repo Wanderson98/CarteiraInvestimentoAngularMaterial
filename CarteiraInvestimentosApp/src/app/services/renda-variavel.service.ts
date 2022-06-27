@@ -21,6 +21,10 @@ export class RendaVariavelService {
   pegarTodos(): Observable<RendaVariavel[]> {
     return this.http.get<RendaVariavel[]>(this.urlApi, httpOptions)
   }
+  pegarTodosValor(): Observable<RendaVariavel[]> {
+    const url = `${this.urlApi}/valor`;
+    return this.http.get<RendaVariavel[]>(url, httpOptions)
+  }
   pegarPorId(rendaVariavelId: number): Observable<RendaVariavel> {
     const url = `${this.urlApi}/${rendaVariavelId}`;
     return this.http.get<RendaVariavel>(url, httpOptions)

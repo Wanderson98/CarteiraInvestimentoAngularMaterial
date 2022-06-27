@@ -20,6 +20,10 @@ export class RendaFixaService {
   pegarTodos(): Observable<RendaFixa[]> {
     return this.http.get<RendaFixa[]>(this.urlApi, httpOptions)
   }
+  pegarTodosValor(): Observable<RendaFixa[]> {
+    const url = `${this.urlApi}/valor`;
+    return this.http.get<RendaFixa[]>(url, httpOptions)
+  }
   pegarPorId(rendaFixaId: number): Observable<RendaFixa> {
     const url = `${this.urlApi}/${rendaFixaId}`;
     return this.http.get<RendaFixa>(url, httpOptions)

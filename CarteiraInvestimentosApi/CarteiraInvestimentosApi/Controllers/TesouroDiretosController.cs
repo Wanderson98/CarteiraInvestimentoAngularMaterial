@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using CarteiraInvestimentosApi.Data;
 using CarteiraInvestimentosApi.Models;
+using CarteiraInvestimentosApi.DataApp;
 
 namespace CarteiraInvestimentosApi.Controllers
 {
@@ -23,10 +24,23 @@ namespace CarteiraInvestimentosApi.Controllers
 
         // GET: api/TesouroDiretos
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<TesouroDireto>>> GetTesouroDiretos()
+        public async Task<ActionResult<IEnumerable<TesouroDiretoApp>>> GetTesouroDiretos()
         {
-            return await _context.TesouroDiretos.Include(c=>c.Banco).Include(c=>c.Carteira).Include(c => c.IndexadorRendimentos).
+            List<TesouroDiretoApp> tesouroDiretoApps = new List<TesouroDiretoApp>();
+            var tesouros = await _context.TesouroDiretos.Include(c=>c.Banco).Include(c=>c.Carteira).Include(c => c.IndexadorRendimentos).
                 Include(c=>c.Movimentacoes).ToListAsync();
+
+            foreach(var item in tesouros)
+            {
+                tesouroDiretoApps.Add(new TesouroDiretoApp()
+                {
+                    TesouroDireto = item,
+                    ValorTotal = item.ValorTotalInvestido + item.Rendimento
+                }) ;
+
+            }
+
+            return Ok(tesouroDiretoApps);
         }
 
         // GET: api/TesouroDiretos/5

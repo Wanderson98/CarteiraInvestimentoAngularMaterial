@@ -16,7 +16,8 @@ export class ListCarteirasComponent implements OnInit {
 
   constructor(public dialog: MatDialog, private service: CarteiraService,  private toastr: ToastrService) { }
 
-    displayedColumns: string[] = ['carteiraId', 'carteiraNome', 'dataInicial','usuarioNome','usuarioEmail','action'];
+    displayedColumns: string[] = ['carteiraId', 'carteiraNome', 'dataInicial','usuarioNome','usuarioEmail',
+    'valorTotalCarteira', 'valorTotalPoupanca', 'valorTotalRendaFixa','valorTotalRendaVariavel','valorTotalTesouroDireto','action'];
     dataSource!: MatTableDataSource<any>;
   
     @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -38,7 +39,7 @@ export class ListCarteirasComponent implements OnInit {
     }
   
     ListarTodasCarteiras(){
-      this.service.ListarTodos().subscribe(result => {
+      this.service.ListarTodosValor().subscribe(result => {
       this.dataSource = new MatTableDataSource(result);
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;

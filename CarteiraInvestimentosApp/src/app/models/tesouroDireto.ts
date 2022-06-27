@@ -11,4 +11,5 @@ export class TesouroDireto {
     carteiraId! : number;
     bancoId!: number;
     indexadorRendimentosId!: number;
+    valorTotal!: number;
 }

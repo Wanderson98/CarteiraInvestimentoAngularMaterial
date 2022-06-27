@@ -2,6 +2,7 @@ export class RendaFixa {
     rendaFixaId! : number ;
     nomeRendaFixa! : string
     rentabilidade! : number ;
+    valorTotalInvestido!: number;
     rendimento! : number ;
     vencimento! : Date ;
     liquidez! : string;
@@ -11,4 +12,5 @@ export class RendaFixa {
     bancoId! : number ;
     indexadorRendimentosId! : number ;
     produtoRendaFixaId! : number ;
+    valorTotal!: number;
 }

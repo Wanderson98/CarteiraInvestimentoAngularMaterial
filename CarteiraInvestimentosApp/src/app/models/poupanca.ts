@@ -5,4 +5,5 @@ export class Poupanca {
     carteiraId!:number;
     bancoId!:number;
     isActive!: boolean;
+    valorTotal!: number;
 }

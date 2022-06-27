@@ -17,7 +17,7 @@ export class ListRendaFixaComponent implements OnInit {
 
   constructor(public dialog: MatDialog, private service: RendaFixaService,  private toastr: ToastrService) { }
 
-  displayedColumns: string[] = ['rendaFixaId', 'nomeRendaFixa', 'rendimento','rentabilidade','vencimento',
+  displayedColumns: string[] = ['rendaFixaId', 'nomeRendaFixa','valorTotalInvestido','valorTotal' ,'rendimento','rentabilidade','vencimento',
   'isActive', 'liquidez', 'custos','carteiraNome','bancoNome','indexadorRendimentosNome', 'produtoRendaFixaNome', 'action'];
   dataSource!: MatTableDataSource<any>;
 
@@ -40,7 +40,7 @@ export class ListRendaFixaComponent implements OnInit {
   }
 
   ListarTodosRendaFixa(){
-    this.service.pegarTodos().subscribe(result => {
+    this.service.pegarTodosValor().subscribe(result => {
     this.dataSource = new MatTableDataSource(result);
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;

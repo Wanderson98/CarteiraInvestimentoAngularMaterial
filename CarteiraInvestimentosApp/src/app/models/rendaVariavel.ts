@@ -10,4 +10,5 @@ export class RendaVariavel {
     carteiraId!: number;
     bancoId!: number;
     produtoRendaVariavelId!: number;
+    valorTotal!: number;
 }
