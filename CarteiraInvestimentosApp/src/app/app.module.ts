@@ -37,6 +37,9 @@ import { AddEditPoupancaComponent } from './componentes/poupanca/add-edit-poupan
 import { AddEditMovimentacaoComponent } from './componentes/movimentacao/add-edit-movimentacao/add-edit-movimentacao.component';
 import { ListMovimentacaoComponent } from './componentes/movimentacao/list-movimentacao/list-movimentacao.component';
 import { CadastroComponent } from './componentes/poupanca/cadastro/cadastro.component';
+import { CadastroTesouroDiretoComponent } from './componentes/tesouroDireto/cadastro-tesouro-direto/cadastro-tesouro-direto.component';
+import { CadastroRendaFixaComponent } from './componentes/rendaFixa/cadastro-renda-fixa/cadastro-renda-fixa.component';
+import { CadastroRendaVariavelComponent } from './componentes/rendaVariavel/cadastro-renda-variavel/cadastro-renda-variavel.component';
 
 
 @NgModule({
@@ -71,6 +74,9 @@ import { CadastroComponent } from './componentes/poupanca/cadastro/cadastro.comp
     AddEditMovimentacaoComponent,
     ListMovimentacaoComponent,
     CadastroComponent,
+    CadastroTesouroDiretoComponent,
+    CadastroRendaFixaComponent,
+    CadastroRendaVariavelComponent,
    
   ],
   imports: [

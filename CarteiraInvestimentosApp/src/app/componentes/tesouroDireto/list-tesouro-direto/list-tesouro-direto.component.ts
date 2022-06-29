@@ -7,6 +7,7 @@ import {MatPaginator} from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table';
 import { ToastrService } from 'ngx-toastr';
+import { CadastroTesouroDiretoComponent } from '../cadastro-tesouro-direto/cadastro-tesouro-direto.component';
 
 @Component({
   selector: 'app-list-tesouro-direto',
@@ -37,6 +38,16 @@ export class ListTesouroDiretoComponent implements OnInit {
       }
     });
    
+  }
+
+  openDialogCadastro(){
+    const dialogRef = this.dialog.open(CadastroTesouroDiretoComponent,{
+      width: '40%',
+    }).afterClosed().subscribe(val =>{
+      if(val === 'salvo'){
+        this.ListarTodosTesouro();
+      }
+    });
   }
 
   ListarTodosTesouro(){

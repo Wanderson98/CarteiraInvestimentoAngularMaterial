@@ -1,1 +1,21 @@
-<p class="container">home works!</p>
+<div class="container">
+    <mat-form-field appearance="outline">
+        <mat-label>Tela</mat-label>
+        <mat-select name="food" #select>
+            <mat-option label="--select something --"></mat-option>
+            <mat-option value="1">Login</mat-option>
+            <mat-option value="2">Renda Variavel</mat-option>
+            <mat-option value="3">Tesouro Direto</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <div class="container" *ngIf="select.value === '1'">
+            <app-list-login></app-list-login>
+      </div>
+       <div class="container" *ngIf="select.value === '2'">
+            <app-list-renda-variavel></app-list-renda-variavel>
+      </div>
+      <div class="container" *ngIf="select.value === '3'">
+        <app-list-tesouro-direto></app-list-tesouro-direto>
+  </div>
+</div>

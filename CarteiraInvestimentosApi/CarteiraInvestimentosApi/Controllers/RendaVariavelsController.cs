@@ -33,12 +33,12 @@ namespace CarteiraInvestimentosApi.Controllers
         [HttpGet("valor/")]
         public async Task<ActionResult<IEnumerable<RendaVariavelApp>>> GetRendaVariaveisValor()
         {
-            var variaveis = await _context.RendaVariaveis.Include(c => c.Movimentacoes).Include(c => c.Banco).Include(c => c.ProdutoRendaVariavel)
+            var variaveis = await _context.RendaVariaveis.Where(c=>c.IsActive).Include(c => c.Movimentacoes).Include(c => c.Banco).Include(c => c.ProdutoRendaVariavel)
                 .Include(c => c.Carteira).Include(c => c.Banco).ToListAsync();
             List<RendaVariavelApp> rendaVariavelApps = new List<RendaVariavelApp>();
             foreach(var item in variaveis)
             {
-                AtualizarValores(item);
+                AtualizarRendimentos(item);
                 rendaVariavelApps.Add(new RendaVariavelApp()
                 {
                     RendaVariavel = item,
@@ -155,11 +155,44 @@ namespace CarteiraInvestimentosApi.Controllers
             return _context.RendaVariaveis.Any(e => e.RendaVariavelId == id);
         }
 
-        private void AtualizarValores(RendaVariavel item)
+        private void AtualizarRendimentos(RendaVariavel item)
         {
-            item.Rendimento = (item.CotacaoAtual * item.Unidades) - (item.CotacaoMedia * item.Unidades);
-            _context.RendaVariaveis.Update(item);
-            _context.SaveChanges();
+            IEnumerable<Movimentacao> movimentacaosCompra = _context.Movimentacoes.Where(c => c.RendaVariavelId == item.RendaVariavelId && c.StatusMovimentacaoId == 1);
+            if(movimentacaosCompra.Count() > 0)
+            {
+                decimal valorTotalCompra = 0;
+                decimal unidadesCompra = 0;
+                foreach (var mov in movimentacaosCompra)
+                {
+
+                    valorTotalCompra += mov.Unidades * mov.Valor;
+                    unidadesCompra += mov.Unidades;
+
+                }
+                IEnumerable<Movimentacao> movimentacaosVenda = _context.Movimentacoes.Where(c => c.RendaVariavelId == item.RendaVariavelId && c.StatusMovimentacaoId == 2);
+                decimal valorTotalVenda = 0;
+                decimal unidadesVenda = 0;
+                foreach (var mov in movimentacaosVenda)
+                {
+
+                    valorTotalVenda += mov.Unidades * mov.Valor;
+                    unidadesVenda += mov.Unidades;
+
+                }
+                decimal unidades = unidadesCompra - unidadesVenda;
+                decimal valorTotal = valorTotalCompra - valorTotalVenda;
+                item.CotacaoMedia = valorTotal / unidades;
+                item.Unidades = (int)unidades;
+                item.Rendimento = (item.CotacaoAtual * item.Unidades) - (item.CotacaoMedia * item.Unidades);
+
+                _context.RendaVariaveis.Update(item);
+                _context.SaveChanges();
+            }
+            else 
+            {
+                item.IsActive = false;
+            }
         }
+   
     }
 }

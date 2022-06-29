@@ -33,7 +33,7 @@ namespace CarteiraInvestimentosApi.Controllers
         [HttpGet("valor/")]
         public async Task<ActionResult<IEnumerable<RendaFixaApp>>> GetRendaFixas()
         {
-            var rendafixa = await _context.RendaFixas.Include(c => c.Movimentacoes).Include(c => c.Carteira).Include(c => c.ProdutoRendaFixa).
+            var rendafixa = await _context.RendaFixas.Where(c => c.IsActive).Include(c => c.Movimentacoes).Include(c => c.Carteira).Include(c => c.ProdutoRendaFixa).
                Include(c => c.IndexadorRendimentos).Include(c => c.Banco).ToListAsync();
             List<RendaFixaApp> rendaFixaApps = new List<RendaFixaApp>();
             foreach (var item in rendafixa)

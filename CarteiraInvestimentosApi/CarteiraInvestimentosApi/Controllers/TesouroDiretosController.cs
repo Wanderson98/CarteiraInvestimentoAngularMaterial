@@ -34,7 +34,7 @@ namespace CarteiraInvestimentosApi.Controllers
         public async Task<ActionResult<IEnumerable<TesouroDiretoApp>>> GetTesouroDiretos()
         {
             List<TesouroDiretoApp> tesouroDiretoApps = new List<TesouroDiretoApp>();
-            var tesouros = await _context.TesouroDiretos.Include(c=>c.Banco).Include(c=>c.Carteira).Include(c => c.IndexadorRendimentos).
+            var tesouros = await _context.TesouroDiretos.Where(c => c.IsActive).Include(c=>c.Banco).Include(c=>c.Carteira).Include(c => c.IndexadorRendimentos).
                 Include(c=>c.Movimentacoes).ToListAsync();
 
             foreach(var item in tesouros)

@@ -10161,23 +10161,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\marie\\.nuget\\packages\\": {},
-    "D:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
+    "C:\\Users\\Wanderson Andrade\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Wanderson\\AngularCrud2\\CarteiraInvestimentosApi\\CarteiraInvestimentosApi\\CarteiraInvestimentosApi.csproj",
+      "projectUniqueName": "D:\\Carteira de Investimentos\\CarteiraInvestimentoAngularMaterial\\CarteiraInvestimentosApi\\CarteiraInvestimentosApi\\CarteiraInvestimentosApi.csproj",
       "projectName": "CarteiraInvestimentosApi",
-      "projectPath": "D:\\Wanderson\\AngularCrud2\\CarteiraInvestimentosApi\\CarteiraInvestimentosApi\\CarteiraInvestimentosApi.csproj",
-      "packagesPath": "C:\\Users\\marie\\.nuget\\packages\\",
-      "outputPath": "D:\\Wanderson\\AngularCrud2\\CarteiraInvestimentosApi\\CarteiraInvestimentosApi\\obj\\",
+      "projectPath": "D:\\Carteira de Investimentos\\CarteiraInvestimentoAngularMaterial\\CarteiraInvestimentosApi\\CarteiraInvestimentosApi\\CarteiraInvestimentosApi.csproj",
+      "packagesPath": "C:\\Users\\Wanderson Andrade\\.nuget\\packages\\",
+      "outputPath": "D:\\Carteira de Investimentos\\CarteiraInvestimentoAngularMaterial\\CarteiraInvestimentosApi\\CarteiraInvestimentosApi\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
-        "D:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\marie\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Wanderson Andrade\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
@@ -10263,7 +10263,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.301\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.300\\RuntimeIdentifierGraph.json"
       }
     }
   }

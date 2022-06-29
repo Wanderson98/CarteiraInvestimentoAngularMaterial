@@ -67,16 +67,16 @@ export class AddEditRendaVariavelComponent implements OnInit {
     //atribuição dos dados recebidos ao formulario quando for para atualizar
     if(this.editData){
       this.actionBtn = "Atualizar";
-      this.rendaVariavelForm.controls['nomeDoPapel'].setValue(this.editData.nomeDoPapel);
-       this.rendaVariavelForm.controls['rendimento'].setValue(this.editData.rendimento),
-       this.rendaVariavelForm.controls['unidades'].setValue(this.editData.unidades),
-       this.rendaVariavelForm.controls['cotacaoMedia'].setValue(this.editData.cotacaoMedia),
-       this.rendaVariavelForm.controls['isActive'].setValue(this.editData.isActive),
-       this.rendaVariavelForm.controls['cotacaoAtual'].setValue(this.editData.cotacaoAtual),
-       this.rendaVariavelForm.controls['custos'].setValue(this.editData.custos),
-       this.rendaVariavelForm.controls['carteiraId'].setValue(this.editData.carteiraId);
-       this.rendaVariavelForm.controls['produtoRendaVariavelId'].setValue(this.editData.produtoRendaVariavelId);
-       this.rendaVariavelForm.controls['bancoId'].setValue(this.editData.bancoId);
+      this.rendaVariavelForm.controls['nomeDoPapel'].setValue(this.editData.rendaVariavel.nomeDoPapel);
+       this.rendaVariavelForm.controls['rendimento'].setValue(this.editData.rendaVariavel.rendimento),
+       this.rendaVariavelForm.controls['unidades'].setValue(this.editData.rendaVariavel.unidades),
+       this.rendaVariavelForm.controls['cotacaoMedia'].setValue(this.editData.rendaVariavel.cotacaoMedia),
+       this.rendaVariavelForm.controls['isActive'].setValue(this.editData.rendaVariavel.isActive),
+       this.rendaVariavelForm.controls['cotacaoAtual'].setValue(this.editData.rendaVariavel.cotacaoAtual),
+       this.rendaVariavelForm.controls['custos'].setValue(this.editData.rendaVariavel.custos),
+       this.rendaVariavelForm.controls['carteiraId'].setValue(this.editData.rendaVariavel.carteiraId);
+       this.rendaVariavelForm.controls['produtoRendaVariavelId'].setValue(this.editData.rendaVariavel.produtoRendaVariavelId);
+       this.rendaVariavelForm.controls['bancoId'].setValue(this.editData.rendaVariavel.bancoId);
 
     }
 
@@ -100,7 +100,7 @@ export class AddEditRendaVariavelComponent implements OnInit {
       })
     } else{
        //define o ID para ser atualizado com o id recebido
-      rendaVariavel.rendaVariavelId = this.editData.rendaVariavelId
+      rendaVariavel.rendaVariavelId = this.editData.rendaVariavel.rendaVariavelId
       this.service.atualizarRendaVariavel(rendaVariavel).subscribe({
          //verifica se deu tudo certo, ele avisa que deu tudo certo, limpa o formulario e fecha o dialog
         next:(res) => {

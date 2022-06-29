@@ -142,7 +142,7 @@ namespace CarteiraInvestimentosApi.Controllers
         private decimal ValorTotalPoup(Carteira carteira)
         {
             decimal valorPoupanca = 0;
-            var poupanca = _context.Poupancas.Where(c => c.CarteiraId == carteira.CarteiraId);
+            var poupanca = _context.Poupancas.Where(c => c.CarteiraId == carteira.CarteiraId && c.IsActive);
             foreach (var item in poupanca)
             {
                 valorPoupanca += item.ValorTotalInvestido + item.Rendimento;
@@ -155,7 +155,7 @@ namespace CarteiraInvestimentosApi.Controllers
         private decimal ValorTotalRFixa(Carteira carteira)
         {
             decimal valorRendaFixa = 0;
-            var rendaFixa = _context.RendaFixas.Where(c => c.CarteiraId == carteira.CarteiraId);
+            var rendaFixa = _context.RendaFixas.Where(c => c.CarteiraId == carteira.CarteiraId && c.IsActive);
             foreach (var item in rendaFixa)
             {
                 valorRendaFixa += (item.ValorTotalInvestido + item.Rendimento);
@@ -166,7 +166,7 @@ namespace CarteiraInvestimentosApi.Controllers
         private decimal ValorTotalTesouDireto(Carteira carteira)
         {
             decimal valorTesouroDireto = 0;
-            var tesouroDireto = _context.TesouroDiretos.Where(c => c.CarteiraId == carteira.CarteiraId);
+            var tesouroDireto = _context.TesouroDiretos.Where(c => c.CarteiraId == carteira.CarteiraId && c.IsActive);
             foreach (var item in tesouroDireto)
             {
                 valorTesouroDireto += (item.ValorTotalInvestido + item.Rendimento);
@@ -177,7 +177,7 @@ namespace CarteiraInvestimentosApi.Controllers
         private decimal ValorTotalRVariavel(Carteira carteira)
         {
             decimal valorRendaVariavel = 0;
-            var rendaVariavel = _context.RendaVariaveis.Where(c => c.CarteiraId == carteira.CarteiraId);
+            var rendaVariavel = _context.RendaVariaveis.Where(c => c.CarteiraId == carteira.CarteiraId && c.IsActive);
             foreach (var item in rendaVariavel)
             {
                 valorRendaVariavel += (item.Unidades * item.CotacaoAtual);
