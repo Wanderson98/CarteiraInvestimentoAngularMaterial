@@ -14,7 +14,7 @@
       <!-- ID Column -->
       <ng-container matColumnDef="rendaVariavelId">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> Renda Variavel Id </th>
-        <td mat-cell *matCellDef="let row"> {{row.rendaVariavel.rendaVariavelId}} </td>
+        <td mat-cell *matCellDef="let row; let i = index"> {{i + 1}} </td>
       </ng-container>
       <!-- nome do papel coluna -->
       <ng-container matColumnDef="nomeDoPapel">
@@ -47,10 +47,7 @@
         <td mat-cell *matCellDef="let row"> {{row.rendaVariavel.cotacaoAtual| currency : 'BRL'}} </td>
       </ng-container>
       <!-- ativo coluna -->
-      <ng-container matColumnDef="isActive">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> Ativo</th>
-        <td mat-cell *matCellDef="let row"> {{row.rendaVariavel.isActive}} </td>
-      </ng-container>
+  
       <!-- custos coluna -->
       <ng-container matColumnDef="custos">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> Custos </th>
@@ -79,7 +76,7 @@
         <button mat-icon-button color="primary" (click)="editarRendaVariavel(row)">
             <mat-icon>edit</mat-icon>
         </button>
-        <button mat-icon-button color="warn" (click)="apagarRendaVariavel(row.rendaVariavel.rendaVariavelId)">
+        <button mat-icon-button color="warn" (click)="DialogoExcluir(row)">
             <mat-icon>delete</mat-icon>
         </button>
         </td>

@@ -36,6 +36,7 @@ namespace CarteiraInvestimentosApi.Controllers
             List<PoupancaApp> poupancaApps = new List<PoupancaApp>();
             foreach (var item in poupancas)
             {
+                AtualizarValores(item);
                 poupancaApps.Add(new PoupancaApp()
                 {
                     Poupanca = item,
@@ -133,6 +134,48 @@ namespace CarteiraInvestimentosApi.Controllers
         private bool PoupancaExists(int id)
         {
             return _context.Poupancas.Any(e => e.PoupancaId == id);
+        }
+
+        private void AtualizarValores(Poupanca item)
+        {
+            IEnumerable<Movimentacao> movimentacaosCompra = _context.Movimentacoes.Where(c => c.PoupancaId == item.PoupancaId && c.StatusMovimentacaoId == 1);
+            if (movimentacaosCompra.Count() > 0)
+            {
+                decimal valorTotalCompra = 0;
+                decimal unidadesCompra = 0;
+                foreach (var mov in movimentacaosCompra)
+                {
+
+                    valorTotalCompra += mov.Unidades * mov.Valor;
+                    unidadesCompra += mov.Unidades;
+
+                }
+                IEnumerable<Movimentacao> movimentacaosVenda = _context.Movimentacoes.Where(c => c.PoupancaId == item.PoupancaId && c.StatusMovimentacaoId == 2);
+                decimal valorTotalVenda = 0;
+                decimal unidadesVenda = 0;
+                foreach (var mov in movimentacaosVenda)
+                {
+
+                    valorTotalVenda += mov.Unidades * mov.Valor;
+                    unidadesVenda += mov.Unidades;
+
+                }
+                decimal unidades = unidadesCompra - unidadesVenda;
+                decimal valorTotal = valorTotalCompra - valorTotalVenda;
+                item.ValorTotalInvestido = valorTotal;
+
+                if (valorTotalVenda > valorTotalCompra)
+                {
+                    valorTotal = valorTotal * (-1);
+                    item.Rendimento = valorTotal;
+                    item.ValorTotalInvestido = valorTotalCompra;
+                    item.IsActive = false;
+                }
+                _context.Poupancas.Update(item);
+                _context.SaveChanges();
+
+            }
+
         }
     }
 }

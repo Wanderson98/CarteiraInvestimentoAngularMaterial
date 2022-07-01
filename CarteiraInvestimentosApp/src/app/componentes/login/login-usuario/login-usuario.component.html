@@ -1,0 +1,22 @@
+
+<div id="login" class="container-login">
+  <div class="login">
+      <div class="row">
+          <h1>Login</h1> 
+      </div>
+      <form [formGroup]="loginUs">
+          <div class="mb-4">
+              <label for="InputEmail" class="form-label">Email</label>
+              <input type="email" class="form-control" id="Email" formControlName="email" 
+                  aria-describedby="emailHelp">
+          </div>
+          <div class="mb-3">
+              <label for="InputPassword" class="form-label">Senha</label>
+              <input type="password" class="form-control" id="Password" formControlName="senha">
+          </div>
+          <button type="submit" class="btn btn-primary" (click)="login()">Entrar</button>
+          <button (click)="loginCadastro()"  class="btn btn-primary ms-5"> Cadastro </button>
+      </form>
+  </div>
+</div>
+

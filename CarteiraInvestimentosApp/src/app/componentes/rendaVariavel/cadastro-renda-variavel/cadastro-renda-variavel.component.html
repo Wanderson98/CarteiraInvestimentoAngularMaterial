@@ -25,18 +25,18 @@
     <form [formGroup]="movimentacaoForm">
         <mat-form-field appearance="outline">
             <mat-label>Data Movimentacao</mat-label>
-            <input formControlName="dataMovimentacao" matInput type="date" >
+            <input formControlName="dataMovimentacao" matInput type="date" placeholder="Data">
         </mat-form-field>
 
         <mat-form-field appearance="outline">
             <mat-label>Cotação</mat-label>
-            <input formControlName="valor" matInput type="number">
+            <input formControlName="valor" matInput type="number" placeholder="Cotação Compra">
         </mat-form-field>
     </form>
     <form [formGroup]="rendaVariavelForm">
         <mat-form-field appearance="outline">
             <mat-label>Unidades</mat-label>
-            <input formControlName="unidades" matInput type="text" type="number" placeholder = "Rentabilidade">
+            <input formControlName="unidades" matInput type="text" type="number" placeholder = "Unidades">
         </mat-form-field>
 
         <!-- <mat-form-field appearance="outline">

@@ -38,6 +38,7 @@ namespace CarteiraInvestimentosApi.Controllers
             List<RendaFixaApp> rendaFixaApps = new List<RendaFixaApp>();
             foreach (var item in rendafixa)
             {
+                AtualizarValores(item);
                 rendaFixaApps.Add(new RendaFixaApp()
                 {
                     RendaFixa = item,
@@ -153,6 +154,47 @@ namespace CarteiraInvestimentosApi.Controllers
         private bool RendaFixaExists(int id)
         {
             return _context.RendaFixas.Any(e => e.RendaFixaId == id);
+        }
+
+        private void AtualizarValores(RendaFixa item)
+        {
+            IEnumerable<Movimentacao> movimentacaosCompra = _context.Movimentacoes.Where(c => c.RendaFixaId == item.RendaFixaId && c.StatusMovimentacaoId == 1);
+            if (movimentacaosCompra.Count() > 0)
+            {
+                decimal valorTotalCompra = 0;
+                decimal unidadesCompra = 0;
+                foreach (var mov in movimentacaosCompra)
+                {
+
+                    valorTotalCompra += mov.Unidades * mov.Valor;
+                    unidadesCompra += mov.Unidades;
+
+                }
+                IEnumerable<Movimentacao> movimentacaosVenda = _context.Movimentacoes.Where(c => c.RendaFixaId == item.RendaFixaId && c.StatusMovimentacaoId == 2);
+                decimal valorTotalVenda = 0;
+                decimal unidadesVenda = 0;
+                foreach (var mov in movimentacaosVenda)
+                {
+
+                    valorTotalVenda += mov.Unidades * mov.Valor;
+                    unidadesVenda += mov.Unidades;
+
+                }
+                decimal unidades = unidadesCompra - unidadesVenda;
+                decimal valorTotal = valorTotalCompra - valorTotalVenda;
+                item.ValorTotalInvestido = valorTotal;
+
+                if (valorTotalVenda > valorTotalCompra)
+                {
+                    valorTotal = valorTotal * (-1);
+                    item.Rendimento = valorTotal;
+                    item.ValorTotalInvestido = valorTotalCompra;
+                    item.IsActive = false;
+                }
+                _context.RendaFixas.Update(item);
+                _context.SaveChanges();
+
+            }
         }
     }
 }

@@ -1,0 +1,71 @@
+<h1 mat-dialog-title>Cadastro Renda Fixa</h1>
+<div mat-dialog-content>
+    <form [formGroup]="rendaFixaForm">
+        <mat-form-field appearance="outline">
+            <mat-label> Produto Renda Fixa</mat-label>
+            <mat-select formControlName="produtoRendaFixaId" placeholder="Produto Renda Fixa">
+                <div *ngFor="let u of produtosRF">
+                    <mat-option [value]="u.produtoRendaFixaId"> {{ u.produtoRendaFixaNome }} </mat-option>
+                </div>
+            </mat-select>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+            <mat-label>Nome Renda Fixa</mat-label>
+            <input formControlName="nomeRendaFixa" matInput type="text" placeholder = "Nome Renda Fixa">
+        </mat-form-field>    
+    </form>
+    <form [formGroup]="movimentacaoForm">
+        
+        <mat-form-field appearance="outline">
+            <mat-label>Valor</mat-label>
+            <input formControlName="valor" matInput type="number" placeholder="Valor">
+        </mat-form-field>
+    
+        <mat-form-field appearance="outline" class="mat-form-datas">
+            <mat-label>Data Movimentacao</mat-label>
+            <input formControlName="dataMovimentacao" matInput type="date" placeholder="Data">
+        </mat-form-field>
+    </form>
+    <form [formGroup]="rendaFixaForm">
+        
+        <mat-form-field appearance="outline" class="mat-form-datas">
+            <mat-label>Vencimento</mat-label>
+            <input formControlName="vencimento" matInput type="date" placeholder="Vencimento (Opcional)">
+        </mat-form-field> 
+    
+        <mat-form-field appearance="outline">
+            <mat-label>Liquidez</mat-label>
+            <input formControlName="liquidez" matInput type="text" placeholder="Liquidez (Opcional)" >
+        </mat-form-field> 
+
+        <mat-form-field appearance="outline">
+            <mat-label>Custos</mat-label>
+            <input formControlName="custos" matInput type="number" placeholder="Custos(Opcional)">
+        </mat-form-field> 
+        <mat-form-field appearance="outline">
+            <mat-label> Banco</mat-label>
+            <mat-select formControlName="bancoId" placeholder="Banco" >
+                <div *ngFor="let u of bancos">
+                    <mat-option [value]="u.bancoId"> {{ u.bancoNome }} </mat-option>
+                </div>
+            </mat-select>
+        </mat-form-field>  
+        <mat-form-field appearance="outline">
+            <mat-label> Indexador</mat-label>
+            <mat-select formControlName="indexadorRendimentosId" placeholder="Indexador" >
+                <div *ngFor="let u of indexadores">
+                    <mat-option [value]="u.indexadorRendimentosId"> {{ u.indexadorRendimentosNome}} </mat-option>
+                </div>
+            </mat-select>
+        </mat-form-field>
+    </form>
+</div>
+<div mat-dialog-actions [align]="'end'">
+    <button  mat-raised-button color="warn" mat-dialog-close>Fechar</button>
+    <button  mat-raised-button color="primary"  (click)="EnviarFormulario()">{{actionBtn}}</button>
+</div>
+
+
+
+

@@ -46,7 +46,8 @@ namespace CarteiraInvestimentosApi.Controllers
                     ValorTotalRendaFixa = ValorTotalRFixa(item),
                     ValorTotalTesouroDireto = ValorTotalTesouDireto(item),
                     ValorTotalRendaVariavel = ValorTotalRVariavel(item),
-                    ValorTotalCarteira = ValorTotal(item)
+                    ValorTotalCarteira = ValorTotal(item),
+                    RendimentoDaCarteira = valorTotalRendimento(item)
                 });
 
             };
@@ -58,7 +59,7 @@ namespace CarteiraInvestimentosApi.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<CarteiraApp>> GetCarteira(int id)
         {
-            var carteira = await _context.Carteiras.FindAsync(id);
+            var carteira = await _context.Carteiras.FirstOrDefaultAsync(c=>c.UsuarioId == id);
             var carteiraApp = new CarteiraApp()
             {
                 Carteira = carteira,
@@ -66,7 +67,8 @@ namespace CarteiraInvestimentosApi.Controllers
                 ValorTotalRendaFixa = ValorTotalRFixa(carteira),
                 ValorTotalTesouroDireto = ValorTotalTesouDireto(carteira),
                 ValorTotalRendaVariavel = ValorTotalRVariavel(carteira),
-                ValorTotalCarteira = ValorTotal(carteira)
+                ValorTotalCarteira = ValorTotal(carteira),
+                RendimentoDaCarteira = valorTotalRendimento (carteira)
             };
             if (carteira == null)
             {
@@ -190,6 +192,34 @@ namespace CarteiraInvestimentosApi.Controllers
             return ValorTotalRVariavel(carteira) + ValorTotalTesouDireto(carteira) +
                 ValorTotalRFixa(carteira) + ValorTotalPoup(carteira);
         }
+        private decimal valorTotalRendimento(Carteira carteira)
+        {
+            decimal valorRendaFixa = 0;
+            var rendaFixa = _context.RendaFixas.Where(c => c.CarteiraId == carteira.CarteiraId);
+            foreach (var item in rendaFixa)
+            {
+                valorRendaFixa +=  item.Rendimento;
+            }
+            decimal valorTesouroDireto = 0;
+            var tesouroDireto = _context.TesouroDiretos.Where(c => c.CarteiraId == carteira.CarteiraId);
+            foreach (var item in tesouroDireto)
+            {
+                valorTesouroDireto += item.Rendimento;
+            }
+            decimal valorPoupanca = 0;
+            var poupanca = _context.Poupancas.Where(c => c.CarteiraId == carteira.CarteiraId );
+            foreach (var item in poupanca)
+            {
+                valorPoupanca += item.Rendimento;
+            }
+            decimal valorRendaVariavel = 0;
+            var rendaVariavel = _context.RendaVariaveis.Where(c => c.CarteiraId == carteira.CarteiraId);
+            foreach (var item in rendaVariavel)
+            {
+                valorRendaVariavel += (item.CotacaoAtual * item.Unidades) - (item.CotacaoMedia * item.Unidades);
+            }
 
+            return valorPoupanca + valorRendaFixa + valorRendaVariavel + valorTesouroDireto;
+        }
     }
 }

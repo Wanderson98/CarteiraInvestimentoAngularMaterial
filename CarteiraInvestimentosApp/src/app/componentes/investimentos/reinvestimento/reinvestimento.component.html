@@ -1,0 +1,68 @@
+<div class="container">
+  <mat-form-field appearance="outline">
+    <mat-label>Escolha uma opção</mat-label>
+    <mat-select name="food" #select>
+      <mat-option label="--Escolha--"></mat-option>
+      <mat-option value="1" *ngIf="rendaFixa.length > 0">Renda Fixa</mat-option>
+      <mat-option value="2" *ngIf="rendVariavel.length > 0">Renda Variável</mat-option>
+      <mat-option value="3" *ngIf="poupanca.length > 0">Poupança</mat-option>
+      <mat-option value="4"*ngIf="tesouroDireto.length > 0">Tesouro Direto</mat-option>
+    </mat-select>
+  </mat-form-field>
+  <div *ngIf="select.value === '1'">
+
+    <mat-form-field appearance="outline">
+      <mat-label> Renda Fixa </mat-label>
+      <mat-select  placeholder="Renda Fixa" >
+          <div *ngFor="let u of rendaFixa">
+              <mat-option [value]="u.rendaFixaId"  (onSelectionChange)="openDialogRendaFixa(u)"> {{ u.nomeRendaFixa }} </mat-option>
+          </div>
+      </mat-select>
+    </mat-form-field>
+  </div>
+  <div class="container" *ngIf="select.value === '2'">
+    <mat-form-field appearance="outline">
+      <mat-label> Renda Variável </mat-label>
+      <mat-select  placeholder="Renda Variavel" >
+          <div *ngFor="let u of rendVariavel">
+              <mat-option [value]="u.rendVariavelId" (onSelectionChange)="openDialogRendaVariavel(u)"> {{ u.nomeDoPapel }} </mat-option>
+          </div>
+      </mat-select>
+    </mat-form-field>
+  </div>
+  <div class="container" *ngIf="select.value === '3'">
+    <mat-form-field appearance="outline">
+      <mat-label> Poupança </mat-label>
+      <mat-select  placeholder="Poupança" >
+          <div *ngFor="let u of poupanca">
+              <mat-option [value]="u.poupancaId"  (onSelectionChange)="openDialogPoupanca(u)"> {{ u.banco.bancoNome }}   </mat-option>
+          </div>
+      </mat-select>
+    </mat-form-field>
+  </div>
+  <div class="container" *ngIf="select.value === '4'">
+    <mat-form-field appearance="outline">
+      <mat-label> Tesouro Direto </mat-label>
+      <mat-select  placeholder="Banco" >
+          <div *ngFor="let u of tesouroDireto">
+              <mat-option [value]="u.tesouroDiretoId"  (onSelectionChange)="openDialogTesouroDireto(u)"> {{ u.indexadorRendimentos.indexadorRendimentosNome }} 
+                {{ u.banco.bancoNome}}   {{u.rentabilidade | percent}} 
+              </mat-option>
+          </div>
+      </mat-select>
+    </mat-form-field>
+  </div>
+</div>
+
+<!-- <mat-form-field appearance="outline">
+    <mat-label> Produto Renda Variavel</mat-label>
+    <mat-select formControlName="produtoRendaVariavelId" placeholder="Produto Renda Variavel">
+        <div >
+             <mat-option [value]="u.produtoRendaVariavelId"> {{ u.produtoRendaVariavelNome }} </mat-option> -->
+<!-- </div>
+    </mat-select>
+  </mat-form-field>
+  <ng-container matColumnDef="nomeDoPapel">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Nome Papel</th>
+    <td mat-cell *matCellDef="let row"> {{ row.nomeDoPapel  }} </td>
+  </ng-container> -->

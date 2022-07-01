@@ -11,6 +11,7 @@ import { Poupanca } from 'src/app/models/poupanca';
 import { MovimentacaoService } from 'src/app/services/movimentacao.service'; 
 import { Movimentacao } from 'src/app/models/movimentacao';
 import { UniqueSelectionDispatcher } from '@angular/cdk/collections';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -27,7 +28,8 @@ export class CadastroComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public editData : any,
     private dialog : MatDialogRef<CadastroComponent>,
     private bancoService: BancoService,
-    private cartService: CarteiraService
+    private cartService: CarteiraService,
+    private router: Router
     ) { }
 
     bancos!: Banco[];
@@ -78,16 +80,17 @@ export class CadastroComponent implements OnInit {
     if(!this.editData){
       this.service.salvarPoupanca(poupanca).subscribe({
         next:(res) => {
-            this.toastr.success('Gravando!', 'Inserido com Sucesso Poupanca!');
+
             this.poupancaForm.reset();
             this.poupId = res.poupancaId;
             this.dialog.close('salvo');
             movimentacao.poupancaId = this.poupId;
             this.movService.Salvarmovimentacao(movimentacao).subscribe({
               next:(res) => {
-                  this.toastr.success('Gravando!', 'Inserido com Sucesso! movimentacao');
+                this.toastr.success('Gravando!', 'Inserido com Sucesso!');
                   this.movimentacaoForm.reset();
                   this.dialog.close('salvo');
+                  this.router.navigate(['/']);
               },
               error:()=> {
                 this.toastr.error('Algo deu errado', 'Error movimentacao')

@@ -27,6 +27,11 @@ export class LoginService {
     return this.http.post<Login>(this.url, login, httpOptions);
   }
 
+  RealizarLogin(login: Login): Observable<any>{
+    const apiUrl = `${this.url}/login`;
+    return this.http.post<Login>(this.url, login, httpOptions);
+  }
+
   AtualizarLogin(login: Login): Observable<any>{
     const apiUrl = `${this.url}/${login.loginId}`;
     return this.http.put<Login>(apiUrl, login, httpOptions);

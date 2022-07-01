@@ -43,7 +43,7 @@ export class AddEditBancoComponent implements OnInit {
       this.service.SalvarBanco(banco).subscribe({
         //verifica se deu tudo certo, ele avisa que deu tudo certo, limpa o formulario e fecha o dialog
         next:(res) => {
-            this.toastr.success('Gravando!', 'Inserido com Sucesso!');
+            this.toastr.success('Gravando!', 'Banco salvo com Sucesso!');
             this.bancoForm.reset();
             this.dialog.close('salvo');
         },
@@ -58,7 +58,7 @@ export class AddEditBancoComponent implements OnInit {
       this.service.AtualizarBanco(banco).subscribe({
       //verifica se deu tudo certo, ele avisa que deu tudo certo, limpa o formulario e fecha o dialog
         next:(res) => {
-            this.toastr.warning('Atualizando!', 'Atualizado com Sucesso!');
+            this.toastr.warning('Atualizando!', 'Banco atualizado com Sucesso!');
             this.bancoForm.reset();
             this.dialog.close('atualizado');
         },

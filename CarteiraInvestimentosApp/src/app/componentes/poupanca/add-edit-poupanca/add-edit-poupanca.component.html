@@ -25,6 +25,20 @@
                 </div>
             </mat-select>
           </mat-form-field>
+          <!-- <mat-form-field appearance="outline">
+            <mat-label>Number</mat-label>
+            <input type="text"
+                   placeholder="Banco"
+                   aria-label="Number"
+                   matInput
+                   formControlName="bancoId"
+                   [matAutocomplete]="auto">
+            <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+              <mat-option *ngFor="let option of bancos" [value]="option.bancoId">
+                {{option.bancoNome}}
+              </mat-option>
+            </mat-autocomplete>
+          </mat-form-field> -->
 
           <mat-form-field appearance="outline">
             <mat-label> Carteira</mat-label>

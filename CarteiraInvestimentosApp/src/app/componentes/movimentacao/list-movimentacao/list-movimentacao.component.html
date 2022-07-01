@@ -12,7 +12,7 @@
       <!-- ID Column -->
       <ng-container matColumnDef="movimentacaoId">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> Movimentacao Id </th>
-        <td mat-cell *matCellDef="let row"> {{row.movimentacaoId}} </td>
+        <td mat-cell *matCellDef="let row ; let i = index"> {{i + 1}} </td>
       </ng-container>
   
       <ng-container matColumnDef="valor">
@@ -21,7 +21,7 @@
       </ng-container>
       <ng-container matColumnDef="unidades">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> unidades </th>
-        <td mat-cell *matCellDef="let row"> {{ row.unidades | currency : 'BRL' }} </td>
+        <td mat-cell *matCellDef="let row"> {{ row.unidades }} </td>
       </ng-container>
       <ng-container matColumnDef="dataMovimentacao">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> Data</th>
@@ -41,11 +41,14 @@
       </ng-container>
       <ng-container matColumnDef="tesouroDiretoId">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> tesouroDiretoId </th>
-        <td mat-cell *matCellDef="let row"> <div *ngIf="row.tesouroDiretoId > 0">{{row.tesouroDiretoId}}</div> </td>
+        <td mat-cell *matCellDef="let row"> <div *ngIf="row.tesouroDiretoId > 0">{{row.tesouroDireto.indexadorRendimentos.indexadorRendimentosNome}}
+          {{row.tesouroDireto.banco.bancoNome}} {{row.tesouroDireto.banco.bancoNome}}  {{row.tesouroDireto.rentabilidade | percent }}
+
+        </div> </td>
       </ng-container>
       <ng-container matColumnDef="poupancaId">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> PoupancaId </th>
-        <td mat-cell *matCellDef="let row" > <div *ngIf="row.poupancaId > 0">{{row.poupancaId}}</div>  </td>
+        <td mat-cell *matCellDef="let row" > <div *ngIf="row.poupancaId > 0">{{row.poupanca.banco.bancoNome}}</div>  </td>
       </ng-container>
       <ng-container matColumnDef="action"> 
         <th mat-header-cell *matHeaderCellDef mat-sort-header> Ações </th>
@@ -68,7 +71,7 @@
       </tr>
     </table>
   
-    <mat-paginator [pageSizeOptions]="[ 10, 25, 100]" aria-label="Select page of users"></mat-paginator>
+    <mat-paginator [pageSizeOptions]="[  25, 50, 100]" aria-label="Select page of users"></mat-paginator>
   </div>
   </div>
   

@@ -13,7 +13,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Movimentacao } from 'src/app/models/movimentacao';
 import { MovimentacaoService } from './../../../services/movimentacao.service';
 import { UniqueSelectionDispatcher } from '@angular/cdk/collections';
-
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-cadastro-renda-variavel',
   templateUrl: './cadastro-renda-variavel.component.html',
@@ -30,7 +30,8 @@ export class CadastroRendaVariavelComponent implements OnInit {
     private dialog : MatDialogRef<CadastroRendaVariavelComponent>,
     private bancoService: BancoService,
     private cartService: CarteiraService, 
-    private produtoRVService: ProdutoRendaVariavelService
+    private produtoRVService: ProdutoRendaVariavelService,
+    private router: Router
   ) { }
   produtosRV!: ProdutoRendaVariavel[];
   bancos!: Banco[];
@@ -92,16 +93,20 @@ export class CadastroRendaVariavelComponent implements OnInit {
     if(!this.editData){
       this.service.salvarRendaVariavel(rendaVariavel).subscribe({
         next:(res) => {
-            this.toastr.success('Gravando!', 'Inserido com Sucesso!');
+       
             this.rendaVariavelForm.reset();
             this.rendaVId = res.rendaVariavelId;
             this.dialog.close('salvo');
             movimentacao.rendaVariavelid = this.rendaVId;
             this.movService.Salvarmovimentacao(movimentacao).subscribe({
               next:(res) => {
-                  this.toastr.success('Gravando!', 'Inserido com Sucesso!');
+                
+                
                   this.movimentacaoForm.reset();
                   this.dialog.close('salvo');
+                  setTimeout(() => {
+                    this.router.navigate(['']);
+                  }, 2000,  this.toastr.success('Gravando!', 'Inserido com Sucesso!'));
               },
               error:()=> {
                 this.toastr.error('Algo deu errado', 'Error')

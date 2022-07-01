@@ -26,9 +26,17 @@ namespace CarteiraInvestimentosApi.Controllers
         public async Task<ActionResult<IEnumerable<Movimentacao>>> GetMovimentacoes()
         {
             return await _context.Movimentacoes.Include(c=>c.Poupanca)
-            .Include(c=>c.TesouroDireto).Include(c=>c.StatusMovimentacao)
+            .Include(c=>c.TesouroDireto).Include(c => c.TesouroDireto.Banco).Include(c=>c.StatusMovimentacao)
             .Include(c=>c.RendaFixa).Include(c=>c.RendaVariavel).ToListAsync();
         }
+
+        //[HttpGet("date/")]
+        //public async Task<ActionResult<IEnumerable<Movimentacao>>> GetMovimentacoesDate()
+        //{
+        //    return await _context.Movimentacoes.Include(c => c.Poupanca)
+        //    .Include(c => c.TesouroDireto).Include(c => c.StatusMovimentacao)
+        //    .Include(c => c.RendaFixa).Include(c => c.RendaVariavel).OrderBy(c=>c.DataMovimentacao).ToListAsync();
+        //}
 
         // GET: api/Movimentacoes/5
         [HttpGet("{id}")]

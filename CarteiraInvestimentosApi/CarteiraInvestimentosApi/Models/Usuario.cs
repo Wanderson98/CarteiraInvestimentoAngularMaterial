@@ -25,7 +25,7 @@ namespace CarteiraInvestimentosApi.Models
         [Required]
         [DataType(DataType.Password)]
         public string UsuarioSenha { get; set; }
-
+        public bool IsAdmin { get; set; }
         public IEnumerable<Carteira> Carteiras { get; set; }
 
     }

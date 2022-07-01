@@ -13,7 +13,7 @@
       <!-- ID Column -->
       <ng-container matColumnDef="rendaFixaId">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> Renda Fixa Id </th>
-        <td mat-cell *matCellDef="let row"> {{row.rendaFixa.rendaFixaId}} </td>
+        <td mat-cell *matCellDef="let row; let i = index"> {{i + 1}} </td>
       </ng-container>
       <ng-container matColumnDef="nomeRendaFixa">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> Nome Rendimento</th>

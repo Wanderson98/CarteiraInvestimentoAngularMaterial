@@ -83,6 +83,23 @@ namespace CarteiraInvestimentosApi.Controllers
 
             return CreatedAtAction("GetLogin", new { id = login.LoginId }, login);
         }
+        // POST: api/Logins
+        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        [HttpPost("login/")]
+        public async Task<ActionResult<Login>> RealizarLogin(Login login)
+        {
+            //_context.Logins.Add(login);
+            //await _context.SaveChangesAsync();
+
+
+            if (login.LoginId > 0 && login.LoginEmail != null && login.LoginSenha != null)
+            {
+                return Ok(200);
+            }
+
+
+            return NotFound();
+        }
 
         // DELETE: api/Logins/5
         [HttpDelete("{id}")]

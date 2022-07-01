@@ -1,0 +1,31 @@
+.container-login {
+    width: 100%;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    padding: 15px;
+}
+  
+.login {
+    width: 390px;
+    border-radius: 10px;
+    overflow: hidden;
+    padding: 77px 55px ;
+}
+  
+h1{
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+button{
+    margin-right: 40px;
+}
+mat-form-field{
+    width: 100%;
+}

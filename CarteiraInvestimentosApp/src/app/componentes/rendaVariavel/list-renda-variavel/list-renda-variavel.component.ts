@@ -11,6 +11,7 @@ import { ToastrService } from 'ngx-toastr';
 import { RendaVariavel } from 'src/app/models/rendaVariavel';
 import { AtualizarRendaVariavelService } from 'src/app/services/atualizar-renda-variavel.service';
 import { CadastroRendaVariavelComponent } from '../cadastro-renda-variavel/cadastro-renda-variavel.component';
+import { DialogoExclusaoComponent } from '../dialogo-exclusao/dialogo-exclusao.component';
 
 @Component({
   selector: 'app-list-renda-variavel',
@@ -33,7 +34,6 @@ export class ListRendaVariavelComponent implements OnInit {
     'valorTotal',
     'cotacaoMedia',
     'cotacaoAtual',
-    'isActive',
     'rendimento',
     'custos',
     'carteiraNome',
@@ -94,7 +94,7 @@ export class ListRendaVariavelComponent implements OnInit {
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
 
-      //this.pegarProdutoParaSerAtualizado(this.rendaVariavel); // tá comentado para economizar request se quiser testar só descomentar os campos marcados
+      this.pegarProdutoParaSerAtualizado(this.rendaVariavel); // tá comentado para economizar request se quiser testar só descomentar os campos marcados
     });
   }
   //metodo para editar os dados
@@ -113,18 +113,31 @@ export class ListRendaVariavelComponent implements OnInit {
         }
       });
   }
-  //metodo para apagar um dado
-  apagarRendaVariavel(id: number) {
-    this.service.excluirRendaVariavel(id).subscribe({
-      next: (res) => {
-        this.toastr.error('Excluindo!', 'Excluido com Sucesso!');
-        this.ListarTodosRendaVariavel();
-      },
-      error: () => {
-        this.toastr.warning('Algo deu errado', 'Error');
-      },
-    });
+
+  DialogoExcluir(row: any) {
+    //ele abre o matdialog com  o componente chamado
+    this.dialog
+      .open(DialogoExclusaoComponent, {
+        width: '40%',
+        //envia o dado para o outro componente
+        data: row,
+      })
+      .afterClosed().subscribe((val) => {
+          this.ListarTodosRendaVariavel();
+      });
   }
+  //metodo para apagar um dado
+  // apagarRendaVariavel(id: number) {
+  //   this.service.excluirRendaVariavel(id).subscribe({
+  //     next: (res) => {
+  //       this.toastr.error('Excluindo!', 'Excluido com Sucesso!');
+  //       this.ListarTodosRendaVariavel();
+  //     },
+  //     error: () => {
+  //       this.toastr.warning('Algo deu errado', 'Error');
+  //     },
+  //   });
+  // }
   //metodo que pegar os produtos para atualizar o valor atual automaticamente
   pegarProdutoParaSerAtualizado(produto: any) {
     //for que percorre os produtos que vieram pelo metodo

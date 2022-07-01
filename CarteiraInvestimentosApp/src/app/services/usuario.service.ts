@@ -35,4 +35,7 @@ export class UsuarioService {
     const url = `${this.urlApi}/${usuario}`;
     return this.http.delete<number>(url, httpOptions)
   }
+  obterUsuarioPorEmailSenha(email: string, senha: string): Observable<Usuario> {
+    return this.http.get<Usuario>(`${this.urlApi}/${email}/${senha}`);
+  }
 }

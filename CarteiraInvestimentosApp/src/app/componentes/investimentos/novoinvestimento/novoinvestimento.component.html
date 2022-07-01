@@ -1,0 +1,15 @@
+<div class="container">
+    <mat-form-field appearance="outline">
+        <mat-label>Escolha uma opção</mat-label>
+        <mat-select name="food" #select>
+            <mat-option label="--select something --"></mat-option>
+            <mat-option (click)="openDialogCadRV()">Renda Variável</mat-option>
+            <mat-option (click)="openDialogCadRF()">Renda Fixa</mat-option>
+            <mat-option (click)="openDialogCadPoup()">Poupança</mat-option>
+            <mat-option (click)="openDialogCadTD()">Tesouro Direto</mat-option>
+        </mat-select>
+    </mat-form-field>
+</div>
+
+
+

@@ -1,0 +1,37 @@
+.example-spacer {
+  flex: 1 1 auto;
+}
+
+.example-container {
+  height: 90%;
+  border: 1px solid rgba(0, 0, 0, 0.5);
+}
+  
+.example-sidenav-content {
+  display: flex;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+    
+}
+  
+.example-sidenav {
+  padding: 20px;
+    
+}
+
+.login{
+   text-align: center;
+  left: 90%;
+ // padding: 10px;
+   font-size: 20px;
+}
+
+i {
+  margin-right: 10px;
+}
+
+.invisivel{
+  visibility: collapse;
+}
+ 

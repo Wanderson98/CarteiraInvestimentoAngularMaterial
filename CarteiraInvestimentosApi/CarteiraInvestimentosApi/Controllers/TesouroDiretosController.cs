@@ -39,6 +39,7 @@ namespace CarteiraInvestimentosApi.Controllers
 
             foreach(var item in tesouros)
             {
+                AtualizarValores(item);
                 tesouroDiretoApps.Add(new TesouroDiretoApp()
                 {
                     TesouroDireto = item,
@@ -149,6 +150,48 @@ namespace CarteiraInvestimentosApi.Controllers
         private bool TesouroDiretoExists(int id)
         {
             return _context.TesouroDiretos.Any(e => e.TesouroDiretoId == id);
+        }
+
+        private void AtualizarValores(TesouroDireto item)
+        {
+            IEnumerable<Movimentacao> movimentacaosCompra = _context.Movimentacoes.Where(c => c.TesouroDiretoId == item.TesouroDiretoId && c.StatusMovimentacaoId == 1);
+            if (movimentacaosCompra.Count() > 0)
+            {
+                decimal valorTotalCompra = 0;
+                decimal unidadesCompra = 0;
+                foreach (var mov in movimentacaosCompra)
+                {
+
+                    valorTotalCompra += mov.Unidades * mov.Valor;
+                    unidadesCompra += mov.Unidades;
+
+                }
+                IEnumerable<Movimentacao> movimentacaosVenda = _context.Movimentacoes.Where(c => c.TesouroDiretoId == item.TesouroDiretoId && c.StatusMovimentacaoId == 2);
+                decimal valorTotalVenda = 0;
+                decimal unidadesVenda = 0;
+                foreach (var mov in movimentacaosVenda)
+                {
+
+                    valorTotalVenda += mov.Unidades * mov.Valor;
+                    unidadesVenda += mov.Unidades;
+
+                }
+                decimal unidades = unidadesCompra - unidadesVenda;
+                decimal valorTotal = valorTotalCompra - valorTotalVenda;
+                item.ValorTotalInvestido = valorTotal;
+
+                if (valorTotalVenda > valorTotalCompra)
+                {
+                    valorTotal = valorTotal * (-1);
+                    item.Rendimento = valorTotal;
+                    item.ValorTotalInvestido = valorTotalCompra;
+                    item.IsActive = false;
+                }
+                _context.TesouroDiretos.Update(item);
+                _context.SaveChanges();
+
+            }
+
         }
     }
 }

@@ -72,7 +72,22 @@ namespace CarteiraInvestimentosApi.Controllers
 
             return NoContent();
         }
+        [HttpGet("{email}/{senha}")]
+        public async Task<ActionResult<Usuario>> GetAutenticacaoPorEmailESenha(string email, string senha)
+        {
+            if (_context.Usuarios == null)
+            {
+                return NotFound();
+            }
+            var autenticacao = await _context.Usuarios.FirstOrDefaultAsync(x => x.UsuarioEmail == email && x.UsuarioSenha == senha);
 
+            if (autenticacao == null)
+            {
+                return NotFound();
+            }
+
+            return autenticacao;
+        }
         // POST: api/Usuarios
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]

@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 
 const httpOptions = {headers: new HttpHeaders(
 
-  {'X-RapidAPI-Key': '1d61b45acfmsh2f0afe2e2c2a8d9p1facf8jsn5865547517f8',
+  {'X-RapidAPI-Key': 'bfc580e7b6mshfbce251b4543b5fp13884bjsn38a6aa9e2806',
     'X-RapidAPI-Host': 'google-finance4.p.rapidapi.com'
   },
   

@@ -1,5 +1,5 @@
 <div class="container mt-3">
-  <!-- <button mat-raised-button color="warn" (click)="openDialog()">Adicionar Poupança</button> -->
+  <!-- <button mat-raised-button color="warn" (click)="openDialog()">Adicionar Poupança 1</button> -->
   <button mat-raised-button color="warn" (click)="openDialogCadastro()">Adicionar Poupança </button>
 <mat-form-field appearance="standard">
   <mat-label>Filtro</mat-label>
@@ -11,8 +11,8 @@
 
     <!-- ID Column -->
     <ng-container matColumnDef="poupancaId">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header> Poupanca Id </th>
-      <td mat-cell *matCellDef="let row"> {{row.poupanca.poupancaId}} </td>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>  </th>
+      <td mat-cell *matCellDef="let row; let i = index"> {{i + 1}} </td>
     </ng-container>
 
     <ng-container matColumnDef="valorTotalInvestido">

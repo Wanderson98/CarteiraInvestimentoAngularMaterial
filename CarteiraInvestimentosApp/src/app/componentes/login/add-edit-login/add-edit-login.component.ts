@@ -31,9 +31,9 @@ export class AddEditLoginComponent implements OnInit {
     }
   }
   EnviarFormulario(): void{
-    const produtoRV : Login = this.loginForm.value;
+    const login : Login = this.loginForm.value;
     if(!this.editData){
-      this.service.SalvarLogin(produtoRV).subscribe({
+      this.service.SalvarLogin(login).subscribe({
         next:(res) => {
             this.toastr.success('Gravando!', 'Inserido com Sucesso!');
             this.loginForm.reset();
@@ -44,8 +44,8 @@ export class AddEditLoginComponent implements OnInit {
         }
       })
     } else{
-      produtoRV.loginId = this.editData.loginId
-      this.service.AtualizarLogin(produtoRV).subscribe({
+      login.loginId = this.editData.loginId
+      this.service.AtualizarLogin(login).subscribe({
         next:(res) => {
             this.toastr.warning('Atualizando!', 'Atualizado com Sucesso!');
             this.loginForm.reset();

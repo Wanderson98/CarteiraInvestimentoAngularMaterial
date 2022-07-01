@@ -12,7 +12,7 @@ import { ToastrService } from 'ngx-toastr';
 import { Movimentacao } from 'src/app/models/movimentacao';
 import { MovimentacaoService } from './../../../services/movimentacao.service';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-cadastro-tesouro-direto',
   templateUrl: './cadastro-tesouro-direto.component.html',
@@ -29,7 +29,8 @@ export class CadastroTesouroDiretoComponent implements OnInit {
     private dialog : MatDialogRef<CadastroTesouroDiretoComponent>, 
     private bancoService: BancoService,
     private cartService: CarteiraService,  
-    private indexService: IndexadorService
+    private indexService: IndexadorService,
+    private router: Router
   ) { }
   bancos!: Banco[];
   carteiras! : Carteira[];
@@ -90,7 +91,7 @@ export class CadastroTesouroDiretoComponent implements OnInit {
     if(!this.editData){
       this.service.salvarTesouro(TesouroDireto).subscribe({
         next:(res) => {
-            this.toastr.success('Gravando!', 'Inserido com Sucesso!');
+           
             this.tesouroForm.reset();
             this.tesouroId = res.tesouroDiretoId;
             this.dialog.close('salvo');
@@ -100,6 +101,7 @@ export class CadastroTesouroDiretoComponent implements OnInit {
                 this.toastr.success('Gravando!', 'Inserido com Sucesso!');
                 this.movimentacaoForm.reset();
                 this.dialog.close('salvo');
+                this.router.navigate(['/']);
              },
             error:()=> {
               this.toastr.error('Algo deu errado', 'Error')

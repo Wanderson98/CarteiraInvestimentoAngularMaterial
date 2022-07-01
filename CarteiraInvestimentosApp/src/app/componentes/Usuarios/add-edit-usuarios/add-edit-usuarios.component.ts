@@ -4,7 +4,7 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-
+import { ValidarCpf } from 'src/app/validar-cpf';
 @Component({
   selector: 'app-add-edit-usuarios',
   templateUrl: './add-edit-usuarios.component.html',
@@ -23,12 +23,12 @@ export class AddEditUsuariosComponent implements OnInit {
   ngOnInit(): void {
 
     this.usuarioForm = this.formBuilder.group({
-      usuarioNome : ['', Validators.required],
-      usuarioSobrenome : ['', Validators.required],
-      usuarioEmail : ['', Validators.required],
+      usuarioNome : ['',Validators.compose([ Validators.required, Validators.minLength(3)])],
+      usuarioSobrenome : ['',Validators.compose([ Validators.required, Validators.minLength(3)])],
+      usuarioEmail : ['',Validators.compose([ Validators.required, Validators.email])],
       usuarioTelefone : ['', Validators.required],
-      usuarioCpf : ['', Validators.required],
-      usuarioSenha : ['', Validators.required],
+      usuarioCpf : ['', Validators.compose([Validators.required, ValidarCpf.ValidaCpf,Validators.maxLength(11)])],
+      usuarioSenha : ['', Validators.compose([ Validators.required, Validators.minLength(6)])],
 
     });
 

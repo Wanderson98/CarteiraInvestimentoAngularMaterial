@@ -1,0 +1,36 @@
+<div  mat-dialog-content class="container-login">
+    <div class="login">
+            <h1 mat-dialog-title>Cadastro</h1>
+            <form [formGroup]="usuarioForm">
+                <mat-form-field appearance="outline">
+                    <mat-label>Nome do Usuario</mat-label>
+                    <input formControlName="usuarioNome" matInput >
+                </mat-form-field>
+                <mat-form-field appearance="outline">
+                    <mat-label>Sobrenome do Usuario</mat-label>
+                    <input formControlName="usuarioSobrenome" matInput >
+                </mat-form-field>
+                <mat-form-field appearance="outline">
+                    <mat-label>Email do Usuario</mat-label>
+                    <input formControlName="usuarioEmail" matInput type="email">
+                </mat-form-field>
+                <mat-form-field appearance="outline">
+                    <mat-label>Telefone do Usuario</mat-label>
+                    <input formControlName="usuarioTelefone" matInput >
+                </mat-form-field>
+                <mat-form-field appearance="outline">
+                    <mat-label>Cpf do Usuario</mat-label>
+                    <input formControlName="usuarioCpf" matInput >
+                </mat-form-field>
+                <mat-form-field appearance="outline">
+                    <mat-label>Senha do Usuario</mat-label>
+                    <input formControlName="usuarioSenha" matInput type="password">
+                </mat-form-field>
+            </form>
+        <div mat-dialog-actions>
+            <button  mat-raised-button color="warn" mat-dialog-close>Fechar</button>
+            <button  mat-raised-button color="primary" (click)="EnviarFormulario()">cadastrar</button>
+        </div>
+    </div>
+</div>
+

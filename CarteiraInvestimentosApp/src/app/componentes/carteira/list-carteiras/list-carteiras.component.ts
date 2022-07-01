@@ -19,13 +19,13 @@ export class ListCarteirasComponent implements OnInit {
     displayedColumns: string[] = ['carteiraId', 'carteiraNome', 'dataInicial','usuarioNome','usuarioEmail',
     'valorTotalCarteira', 'valorTotalPoupanca', 'valorTotalRendaFixa','valorTotalRendaVariavel','valorTotalTesouroDireto','action'];
     dataSource!: MatTableDataSource<any>;
-  
+    usuario:any;
     @ViewChild(MatPaginator) paginator!: MatPaginator;
     @ViewChild(MatSort) sort!: MatSort;
     
     ngOnInit(): void {
       this.ListarTodasCarteiras();
-     
+      this.usuario = this.getUsuario();
     }
     openDialog() {
       const dialogRef = this.dialog.open(AddEditCarteirasComponent,{
@@ -76,4 +76,11 @@ export class ListCarteirasComponent implements OnInit {
       }
     }
 
+    getUsuario(){
+      const usuario = window.sessionStorage.getItem("usuario");
+      if(usuario != null){
+        return JSON.parse(usuario)
+      }
+      return null;
+    };
 }

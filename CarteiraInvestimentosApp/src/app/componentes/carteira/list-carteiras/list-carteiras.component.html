@@ -17,7 +17,7 @@
     
       <ng-container matColumnDef="carteiraNome">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> Carteira Nome </th>
-        <td mat-cell *matCellDef="let row"> {{row.carteira.carteiraNome}} </td>
+        <td mat-cell *matCellDef="let row ; let i = index"> {{i + 1}} </td>
       </ng-container>
       <ng-container matColumnDef="dataInicial">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> Data Inicial </th>

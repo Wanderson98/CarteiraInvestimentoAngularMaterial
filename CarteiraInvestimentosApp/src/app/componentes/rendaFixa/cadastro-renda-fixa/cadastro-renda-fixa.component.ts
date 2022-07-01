@@ -15,6 +15,7 @@ import { ProdutoRendaFixaService } from 'src/app/services/produto-renda-fixa.ser
 import { Movimentacao } from 'src/app/models/movimentacao';
 import { MovimentacaoService } from './../../../services/movimentacao.service';
 import { UniqueSelectionDispatcher } from '@angular/cdk/collections';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -33,7 +34,8 @@ export class CadastroRendaFixaComponent implements OnInit {
     private bancoService: BancoService,
     private cartService: CarteiraService,  
     private indexService: IndexadorService, 
-    private produtoRFService: ProdutoRendaFixaService
+    private produtoRFService: ProdutoRendaFixaService,
+    private router: Router
     ) { }
     produtosRF!: ProdutoRendaFixa[];
     bancos!: Banco[];
@@ -100,16 +102,17 @@ export class CadastroRendaFixaComponent implements OnInit {
     if(!this.editData){
       this.service.salvarRendaFixa(rendaFixa).subscribe({
         next:(res) => {
-            this.toastr.success('Gravando!', 'Inserido com Sucesso!RendaFixa');
+         
             this.rendaFixaForm.reset();
             this.rendaFId = res.rendaFixaId;
             this.dialog.close('salvo');
             movimentacao.rendaFixaId = this.rendaFId;
             this.movService.Salvarmovimentacao(movimentacao).subscribe({
               next:(res) => {
-                  this.toastr.success('Gravando!', 'Inserido com Sucesso! REndaFixa');
+                  this.toastr.success('Gravando!', 'Inserido com Sucesso!');
                   this.movimentacaoForm.reset();
                   this.dialog.close('salvo');
+                  this.router.navigate(['/']);
             },
             error:()=> {
               this.toastr.error('Algo deu errado', 'Error RendaFixa')

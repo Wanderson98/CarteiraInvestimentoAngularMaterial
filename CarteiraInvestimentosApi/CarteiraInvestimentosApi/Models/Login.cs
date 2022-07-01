@@ -9,6 +9,6 @@ namespace CarteiraInvestimentosApi.Models
         [StringLength(100)]
         public string LoginEmail { get; set; }
         [DataType(DataType.Password)]
-        public int LoginSenha { get; set; }
+        public string LoginSenha { get; set; }
     }
 }

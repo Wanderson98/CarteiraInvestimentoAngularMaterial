@@ -18,8 +18,7 @@ export class ListTesouroDiretoComponent implements OnInit {
 
   constructor(public dialog: MatDialog, private service: TesouroDiretoService,  private toastr: ToastrService) { }
 
-  displayedColumns: string[] = ['tesouroDiretoId', 'valorTotalInvestido', 'valorTotal','rendimento','rentabilidade','vencimento',
-  'isActive', 'liquidez', 'custos','carteiraNome','bancoNome','indexadorRendimentosNome', 'action'];
+  displayedColumns: string[] = ['tesouroDiretoId', 'valorTotalInvestido', 'valorTotal','rendimento','rentabilidade','vencimento', 'liquidez', 'custos','carteiraNome','bancoNome','indexadorRendimentosNome', 'action'];
   dataSource!: MatTableDataSource<any>;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;

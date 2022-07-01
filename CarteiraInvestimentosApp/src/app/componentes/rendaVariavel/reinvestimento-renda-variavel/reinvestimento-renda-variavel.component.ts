@@ -1,0 +1,133 @@
+import { RendaVariavel } from './../../../models/rendaVariavel';
+import { ProdutoRendaVariavel } from './../../../models/produtoRendaVariavel';
+import { ProdutoRendaVariavelService } from './../../../services/produto-renda-variavel.service';
+import { RendaVariavelService } from './../../../services/renda-variavel.service';
+import { Banco } from 'src/app/models/banco';
+import { BancoService } from './../../../services/banco.service';
+import { Carteira } from './../../../models/carteira';
+import { CarteiraService } from './../../../services/carteira.service';
+import { Component, Inject, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { Movimentacao } from 'src/app/models/movimentacao';
+import { MovimentacaoService } from './../../../services/movimentacao.service';
+import { UniqueSelectionDispatcher } from '@angular/cdk/collections';
+import { Router } from '@angular/router';
+
+@Component({
+  selector: 'app-reinvestimento-renda-variavel',
+  templateUrl: './reinvestimento-renda-variavel.component.html',
+  styleUrls: ['./reinvestimento-renda-variavel.component.scss']
+})
+export class ReinvestimentoRendaVariavelComponent implements OnInit {
+
+  constructor(
+    private formBuilder: UntypedFormBuilder, 
+    private service: RendaVariavelService,
+    private movService: MovimentacaoService, 
+    private toastr: ToastrService,
+    @Inject(MAT_DIALOG_DATA) public editData : any,
+    private dialog : MatDialogRef<ReinvestimentoRendaVariavelComponent>,
+    private bancoService: BancoService,
+    private cartService: CarteiraService, 
+    private produtoRVService: ProdutoRendaVariavelService,
+    private router: Router
+  ) { }
+  produtosRV!: ProdutoRendaVariavel[];
+  bancos!: Banco[];
+  carteiras! : Carteira[];
+  rendaVariavelForm!: FormGroup;
+  movimentacaoForm!: FormGroup;
+  actionBtn : string = "Salvar";
+  rendaVId!: number;
+
+  ngOnInit(): void {
+
+    this.bancoService.ListarTodos().subscribe(data => {
+      this.bancos = data;
+    })
+
+    this.cartService.ListarTodos().subscribe(data => {
+      this.carteiras = data;
+    });
+
+    this.produtoRVService.pegarTodos().subscribe(data => {
+      this.produtosRV = data;
+    });
+
+    this.rendaVariavelForm = this.formBuilder.group({
+      rendaVariavelId : ['', Validators.required],
+      nomeDoPapel : ['', Validators.required],
+      rendimento : ['', Validators.required,],
+      unidades : ['', Validators.required],
+      cotacaoMedia : ['', ],
+      isActive : ['true', Validators.required],
+      cotacaoAtual : ['',],
+      custos : ['', ],
+      carteiraId : ['1', Validators.required],
+      produtoRendaVariavelId : ['', Validators.required],
+      bancoId : ['', Validators.required],
+
+    });
+
+    this.movimentacaoForm = this.formBuilder.group({
+      movimentacaoId : ['', Validators.required],
+      valor : ['', Validators.required],
+      unidades : ['', Validators.required,],
+      dataMovimentacao : ['', Validators.required],
+      statusMovimentacaoId : [1, ],
+      rendaVariavelid : ['', Validators.required],
+      rendaFixaId : ['', ],
+      tesouroDiretoId : ['',],
+      poupancaId : ['', Validators.required],
+    });
+
+    if(this.editData){
+      this.actionBtn = "Atualizar";
+      this.rendaVariavelForm.controls['nomeDoPapel'].setValue(this.editData.rendaVariavel.nomeDoPapel);
+       this.rendaVariavelForm.controls['rendimento'].setValue(this.editData.rendaVariavel.rendimento),
+       this.rendaVariavelForm.controls['isActive'].setValue(this.editData.rendaVariavel.isActive),
+       this.rendaVariavelForm.controls['custos'].setValue(this.editData.rendaVariavel.custos),
+       this.rendaVariavelForm.controls['carteiraId'].setValue(this.editData.rendaVariavel.carteiraId);
+       this.rendaVariavelForm.controls['produtoRendaVariavelId'].setValue(this.editData.rendaVariavel.produtoRendaVariavelId);
+       this.rendaVariavelForm.controls['bancoId'].setValue(this.editData.rendaVariavel.bancoId);
+    }
+  }
+
+  EnviarFormulario(): void{
+
+    const rendaVariavel : RendaVariavel = this.rendaVariavelForm.value;
+    const movimentacao : Movimentacao = this.movimentacaoForm.value;
+    rendaVariavel.cotacaoMedia = movimentacao.valor;
+    movimentacao.unidades = rendaVariavel.unidades;
+    rendaVariavel.rendaVariavelId = this.editData.rendaVariavelId
+    
+    if(this.editData){
+      this.service.atualizarRendaVariavel(rendaVariavel).subscribe({
+        next:(res) => {
+   
+            this.rendaVariavelForm.reset();
+            this.dialog.close('salvo');
+            movimentacao.rendaVariavelid =  this.editData.rendaVariavelId;
+            this.movService.Salvarmovimentacao(movimentacao).subscribe({
+              next:(res) => {
+                  this.toastr.success('Gravando!', 'Reinvestimento realizado com Sucesso!');
+                  this.movimentacaoForm.reset();
+                  this.dialog.close('salvo');
+                  this.router.navigate(['/']);
+              },
+              error:()=> {
+                this.toastr.error('Algo deu errado', 'Error')
+              }
+            })
+      
+          },
+          error:()=> {
+            this.toastr.error('Algo deu errado', 'Error')
+          }
+        })
+    }
+  }
+
+}

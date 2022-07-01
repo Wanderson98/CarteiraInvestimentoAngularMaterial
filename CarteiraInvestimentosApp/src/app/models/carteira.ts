@@ -8,4 +8,5 @@ export class Carteira{
     valorTotalRendaFixa!: number;
     valorTotalRendaVariavel!: number;
     valorTotalTesouroDireto!: number;
+    rendimentoDaCarteira!: number;
 }

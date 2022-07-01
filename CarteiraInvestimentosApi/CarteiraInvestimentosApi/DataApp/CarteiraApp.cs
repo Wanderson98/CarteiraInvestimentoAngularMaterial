@@ -12,7 +12,7 @@ namespace CarteiraInvestimentosApi.DataApp
         public decimal ValorTotalRendaFixa { get; set; }
         public decimal ValorTotalRendaVariavel { get; set; }
         public decimal ValorTotalTesouroDireto { get; set; }
-
+        public decimal RendimentoDaCarteira { get; set; }
 
     }
 }

@@ -10,7 +10,7 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-add-edit-tesouro-direto',
@@ -22,7 +22,8 @@ export class AddEditTesouroDiretoComponent implements OnInit {
   constructor(private formBuilder: UntypedFormBuilder, private service: TesouroDiretoService, private toastr: ToastrService,
     @Inject(MAT_DIALOG_DATA) public editData : any,
     private dialog : MatDialogRef<AddEditTesouroDiretoComponent>, private bancoService: BancoService,
-    private cartService: CarteiraService,  private indexService: IndexadorService
+    private cartService: CarteiraService,  private indexService: IndexadorService, 
+    private router: Router
     ) { }
     bancos!: Banco[];
     carteiras! : Carteira[];

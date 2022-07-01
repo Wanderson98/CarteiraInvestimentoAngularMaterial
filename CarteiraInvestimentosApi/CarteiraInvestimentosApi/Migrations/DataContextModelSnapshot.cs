@@ -83,8 +83,8 @@ namespace CarteiraInvestimentosApi.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("TEXT");
 
-                    b.Property<int>("LoginSenha")
-                        .HasColumnType("INTEGER");
+                    b.Property<string>("LoginSenha")
+                        .HasColumnType("TEXT");
 
                     b.HasKey("LoginId");
 
@@ -365,6 +365,9 @@ namespace CarteiraInvestimentosApi.Migrations
                 {
                     b.Property<int>("UsuarioId")
                         .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<bool>("IsAdmin")
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("UsuarioCpf")

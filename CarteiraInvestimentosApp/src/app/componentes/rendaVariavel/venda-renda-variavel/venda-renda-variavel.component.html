@@ -1,0 +1,61 @@
+<h1 mat-dialog-title>Cadastro Renda Variavel</h1>
+<div  mat-dialog-content>
+    <form [formGroup]="rendaVariavelForm">
+        <mat-form-field appearance="outline">
+            <mat-label> Produto Renda Variavel</mat-label>
+            <mat-select formControlName="produtoRendaVariavelId" placeholder="Produto Renda Variavel">
+                <div *ngFor="let u of produtosRV">
+                    <mat-option [value]="u.produtoRendaVariavelId"> {{ u.produtoRendaVariavelNome }} </mat-option>
+                </div>
+            </mat-select>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+            <mat-label>Nome Papel</mat-label>
+            <input formControlName="nomeDoPapel" matInput type="text" placeholder = "Ticket Papel">
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+            <mat-label> Banco</mat-label>
+            <mat-select formControlName="bancoId" placeholder="Banco" >
+                <div *ngFor="let u of bancos">
+                    <mat-option [value]="u.bancoId"> {{ u.bancoNome }} </mat-option>
+                </div>
+            </mat-select>
+        </mat-form-field>
+    </form>
+    <form [formGroup]="movimentacaoForm">
+        <mat-form-field appearance="outline">
+            <mat-label>Data Movimentacao</mat-label>
+            <input formControlName="dataMovimentacao" matInput type="date" placeholder="Data" >
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+            <mat-label>Cotação</mat-label>
+            <input formControlName="valor" matInput type="number" placeholder="Cotação Venda">
+        </mat-form-field>
+    </form>
+    <form [formGroup]="rendaVariavelForm">
+        <mat-form-field appearance="outline">
+            <mat-label>Unidades</mat-label>
+            <input formControlName="unidades" matInput type="text" type="number" placeholder = "Unidades">
+        </mat-form-field>
+
+        <!-- <mat-form-field appearance="outline">
+            <mat-label>Cotacao Media</mat-label>
+            <input formControlName="cotacaoMedia" matInput type="number" placeholder="Cotacao Media (Opcional)">
+        </mat-form-field>
+
+         <mat-form-field appearance="outline">
+            <mat-label>Cotacao Atual</mat-label>
+            <input formControlName="cotacaoAtual" matInput type="number" placeholder="Cotacao Atual (Opcional)" >
+        </mat-form-field> -->
+        
+        <mat-form-field appearance="outline">
+            <mat-label>Custos</mat-label>
+            <input formControlName="custos" matInput type="number" placeholder="Custos(Opcional)">
+        </mat-form-field>
+    </form>
+</div>
+<div mat-dialog-actions [align]="'end'">
+    <button  mat-raised-button color="warn" mat-dialog-close>Fechar</button>
+    <button  mat-raised-button color="primary"  (click)="EnviarFormulario()">{{actionBtn}}</button>
+</div>

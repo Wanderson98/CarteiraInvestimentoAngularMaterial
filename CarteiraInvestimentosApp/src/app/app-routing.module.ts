@@ -14,6 +14,12 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ListLoginComponent } from './componentes/login/list-login/list-login.component';
 import { ListPoupancaComponent } from './componentes/poupanca/list-poupanca/list-poupanca.component';
+import { HomeinvestimentoComponent } from './componentes/investimentos/homeinvestimento/homeinvestimento.component';
+import { NovoinvestimentoComponent } from './componentes/investimentos/novoinvestimento/novoinvestimento.component';
+import { ReinvestimentoComponent } from './componentes/investimentos/reinvestimento/reinvestimento.component';
+import { VendaComponent } from './componentes/investimentos/venda/venda.component';
+import { LoginCadastroComponent } from './componentes/login/login-cadastro/login-cadastro.component';
+import { LoginUsuarioComponent } from './componentes/login/login-usuario/login-usuario.component';
 
 const routes: Routes = [
   {path: 'banco', component: BancoComponent},
@@ -25,11 +31,17 @@ const routes: Routes = [
   {path: 'status', component: ListarStatusComponent},
   {path: 'indexador', component: ListIndexadorRendimentosComponent},
   {path: 'usuarios', component: ListUsuariosComponent},
+  {path: 'homeinvestimento', component: HomeinvestimentoComponent},
+  {path: 'novoinvestimento', component: NovoinvestimentoComponent},
+  {path: 'reinvestimento', component: ReinvestimentoComponent},
+  {path: 'venda', component: VendaComponent},
   {path: 'carteira', component: ListCarteirasComponent},
   {path: 'tesouroDireto', component: ListTesouroDiretoComponent},
   {path: 'rendaFixa', component: ListRendaFixaComponent},
   {path: 'rendaVariavel', component: ListRendaVariavelComponent},
-  {path: '', component: HomeComponent}
+  {path: '', component: HomeComponent},
+  {path: 'cadastroDoLogin', component: LoginCadastroComponent},
+  {path: 'loginUsuario', component: LoginUsuarioComponent},
 ];
 
 @NgModule({
