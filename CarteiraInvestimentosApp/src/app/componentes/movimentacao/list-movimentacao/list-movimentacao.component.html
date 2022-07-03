@@ -1,5 +1,5 @@
 <div class="container mt-3">
-    <button mat-raised-button color="warn" (click)="openDialog()">Adicionar Movimentação</button>
+    <!-- <button mat-raised-button color="warn" (click)="openDialog()">Adicionar Movimentação</button> -->
   
   <mat-form-field appearance="standard">
     <mat-label>Filter</mat-label>
@@ -11,7 +11,7 @@
   
       <!-- ID Column -->
       <ng-container matColumnDef="movimentacaoId">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> Movimentacao Id </th>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Movimentacao </th>
         <td mat-cell *matCellDef="let row ; let i = index"> {{i + 1}} </td>
       </ng-container>
   
@@ -32,22 +32,22 @@
         <td mat-cell *matCellDef="let row"> {{row.statusMovimentacao.statusMovimentacaoNome}} </td>
       </ng-container>
       <ng-container matColumnDef="rendaVariavelid">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> rendaVariavelid </th>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Renda Variavel </th>
         <td mat-cell *matCellDef="let row"> <div *ngIf="row.rendaVariavelId">{{row.rendaVariavel.nomeDoPapel}}</div> </td>
       </ng-container>
       <ng-container matColumnDef="rendaFixaId">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> rendaFixaId </th>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Renda Fixa </th>
         <td mat-cell *matCellDef="let row"> <div *ngIf="row.rendaFixaId > 0">{{row.rendaFixa.nomeRendaFixa}}</div> </td>
       </ng-container>
       <ng-container matColumnDef="tesouroDiretoId">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> tesouroDiretoId </th>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Tesouro Direto </th>
         <td mat-cell *matCellDef="let row"> <div *ngIf="row.tesouroDiretoId > 0">{{row.tesouroDireto.indexadorRendimentos.indexadorRendimentosNome}}
           {{row.tesouroDireto.banco.bancoNome}} {{row.tesouroDireto.banco.bancoNome}}  {{row.tesouroDireto.rentabilidade | percent }}
 
         </div> </td>
       </ng-container>
       <ng-container matColumnDef="poupancaId">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> PoupancaId </th>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Poupanca </th>
         <td mat-cell *matCellDef="let row" > <div *ngIf="row.poupancaId > 0">{{row.poupanca.banco.bancoNome}}</div>  </td>
       </ng-container>
       <ng-container matColumnDef="action"> 

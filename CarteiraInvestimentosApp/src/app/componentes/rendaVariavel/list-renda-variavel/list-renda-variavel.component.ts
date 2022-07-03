@@ -94,7 +94,7 @@ export class ListRendaVariavelComponent implements OnInit {
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
 
-      this.pegarProdutoParaSerAtualizado(this.rendaVariavel); // tá comentado para economizar request se quiser testar só descomentar os campos marcados
+      //this.pegarProdutoParaSerAtualizado(this.rendaVariavel); // tá comentado para economizar request se quiser testar só descomentar os campos marcados
     });
   }
   //metodo para editar os dados
@@ -166,12 +166,12 @@ export class ListRendaVariavelComponent implements OnInit {
       this.service.atualizarRendaVariavel(produto).subscribe({
         // - descomentar para usar
         next: (res) => {
-          -(
+          
             // descomentar para usar
             //         //atualiza a lista novamente com os dados atualizados
-
+            this.ListarTodosRendaVariavel();
             console.log('ok')
-          ); //- descomentar para usar
+           //- descomentar para usar
         }, //- descomentar para usar
         error: () => {
           -(

@@ -25,8 +25,8 @@ namespace CarteiraInvestimentosApi.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Movimentacao>>> GetMovimentacoes()
         {
-            return await _context.Movimentacoes.Include(c=>c.Poupanca)
-            .Include(c=>c.TesouroDireto).Include(c => c.TesouroDireto.Banco).Include(c=>c.StatusMovimentacao)
+            return await _context.Movimentacoes.Include(c=>c.Poupanca).Include(c => c.Poupanca.Banco)
+            .Include(c=>c.TesouroDireto).Include(c => c.TesouroDireto.Banco).Include(c => c.TesouroDireto.IndexadorRendimentos).Include(c=>c.StatusMovimentacao)
             .Include(c=>c.RendaFixa).Include(c=>c.RendaVariavel).ToListAsync();
         }
 

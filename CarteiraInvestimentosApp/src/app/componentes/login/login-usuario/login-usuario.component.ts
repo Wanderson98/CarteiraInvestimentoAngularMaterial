@@ -42,9 +42,9 @@ export class LoginUsuarioComponent implements OnInit {
 
     this.usuService.obterUsuarioPorEmailSenha(email,senha).subscribe(
       (resp)=>{
+        this.toastr.success('Login realizado com sucesso.', 'Sucesso!');
         window.sessionStorage.setItem('usuario', JSON.stringify(resp));
         this.router.navigate(['']);
-        this.toastr.success('Login realizado com sucesso.', 'Sucesso!');
         console.log(resp);
       },
       (error)=>{
@@ -61,7 +61,8 @@ export class LoginUsuarioComponent implements OnInit {
       if(val === 'salvo'){
         this.router.navigate(['/']);
       }else{
-        this.dialog.open(LoginCadastroComponent);
+     
+        this.loginUs.reset();
       }
       
     });

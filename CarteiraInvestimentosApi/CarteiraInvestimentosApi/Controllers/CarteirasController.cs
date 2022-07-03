@@ -195,28 +195,28 @@ namespace CarteiraInvestimentosApi.Controllers
         private decimal valorTotalRendimento(Carteira carteira)
         {
             decimal valorRendaFixa = 0;
-            var rendaFixa = _context.RendaFixas.Where(c => c.CarteiraId == carteira.CarteiraId);
+            var rendaFixa = _context.RendaFixas.Where(c => c.CarteiraId == carteira.CarteiraId && c.IsActive);
             foreach (var item in rendaFixa)
             {
                 valorRendaFixa +=  item.Rendimento;
             }
             decimal valorTesouroDireto = 0;
-            var tesouroDireto = _context.TesouroDiretos.Where(c => c.CarteiraId == carteira.CarteiraId);
+            var tesouroDireto = _context.TesouroDiretos.Where(c => c.CarteiraId == carteira.CarteiraId && c.IsActive);
             foreach (var item in tesouroDireto)
             {
                 valorTesouroDireto += item.Rendimento;
             }
             decimal valorPoupanca = 0;
-            var poupanca = _context.Poupancas.Where(c => c.CarteiraId == carteira.CarteiraId );
+            var poupanca = _context.Poupancas.Where(c => c.CarteiraId == carteira.CarteiraId && c.IsActive);
             foreach (var item in poupanca)
             {
                 valorPoupanca += item.Rendimento;
             }
             decimal valorRendaVariavel = 0;
-            var rendaVariavel = _context.RendaVariaveis.Where(c => c.CarteiraId == carteira.CarteiraId);
+            var rendaVariavel = _context.RendaVariaveis.Where(c => c.CarteiraId == carteira.CarteiraId && c.IsActive);
             foreach (var item in rendaVariavel)
             {
-                valorRendaVariavel += (item.CotacaoAtual * item.Unidades) - (item.CotacaoMedia * item.Unidades);
+                valorRendaVariavel += item.Rendimento;
             }
 
             return valorPoupanca + valorRendaFixa + valorRendaVariavel + valorTesouroDireto;

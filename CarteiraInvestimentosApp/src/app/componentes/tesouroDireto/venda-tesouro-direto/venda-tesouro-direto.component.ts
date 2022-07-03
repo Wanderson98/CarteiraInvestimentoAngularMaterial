@@ -74,7 +74,7 @@ export class VendaTesouroDiretoComponent implements OnInit {
       valor : ['', Validators.required],
       unidades : [2, Validators.required,],
       dataMovimentacao : ['', Validators.required,],
-      statusMovimentacaoId : [1, ],
+      statusMovimentacaoId : [2, ],
       rendaVariavelid : ['', Validators.required],
       rendaFixaId : ['', ],
       tesouroDiretoId : ['',],

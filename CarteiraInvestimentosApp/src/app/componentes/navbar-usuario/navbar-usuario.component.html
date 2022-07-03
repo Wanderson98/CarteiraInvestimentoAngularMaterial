@@ -13,9 +13,9 @@
 <mat-drawer-container class="example-container" autosize >
     <mat-drawer #drawer class="sidenav" position="end" mode="over">
       <mat-nav-list class="nav-list"> 
-        <a mat-list-item routerLink="/loginUsuario" (click)="drawer.toggle()">
+        <!-- <a mat-list-item routerLink="/loginUsuario" (click)="drawer.toggle()">
           <i class="material-icons">account_circle</i>  Login
-        </a>
+        </a> -->
         <a mat-list-item routerLink="" (click)="drawer.toggle()">
           <i class="material-icons">list </i> Resumo
         </a>
@@ -31,7 +31,7 @@
         <!-- <a mat-list-item routerLink="/carteira" (click)="drawer.toggle()">
           <i class="material-icons">account_balance_wallet</i>  Carteira
         </a>  -->
-        <a mat-list-item routerLink="#" (click)="drawer.toggle()">
+        <a mat-list-item routerLink="/loginUsuario" (click)="drawer.toggle()">
           <i class="material-icons">exit_to_app</i>  Sair
         </a> 
       </mat-nav-list>

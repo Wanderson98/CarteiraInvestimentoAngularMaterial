@@ -19,7 +19,7 @@ export class ListRendaFixaComponent implements OnInit {
   constructor(public dialog: MatDialog, private service: RendaFixaService,  private toastr: ToastrService) { }
 
   displayedColumns: string[] = ['rendaFixaId', 'nomeRendaFixa','valorTotalInvestido','valorTotal' ,'rendimento','rentabilidade','vencimento',
-  'isActive', 'liquidez', 'custos','carteiraNome','bancoNome','indexadorRendimentosNome', 'produtoRendaFixaNome', 'action'];
+   'liquidez', 'custos','carteiraNome','bancoNome','indexadorRendimentosNome', 'produtoRendaFixaNome', 'action'];
   dataSource!: MatTableDataSource<any>;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -28,7 +28,7 @@ export class ListRendaFixaComponent implements OnInit {
   ngOnInit(): void {
     this.ListarTodosRendaFixa();
    
-  }
+  } 
   openDialog() {
     const dialogRef = this.dialog.open(AddEditRendaFixaComponent,{
       width: '40%',
